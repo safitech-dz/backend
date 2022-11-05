@@ -1,0 +1,163 @@
+[
+    {
+        "topic": "%u/%d/sensor/OWM/actualWeather",
+        "qoS": 2,
+        "frequency-Event": "1h",
+        "retain": true,
+        "description": "Fichier JSON sur les données météorologique actuel",
+        "format": {
+            "humidity": ["required", "numeric", "min:0", "max:100"],
+            "rainfall": ["required", "numeric", "min:0", "max:1000"],
+            "pressure": ["required", "numeric", "min:800", "max:1200"],
+            "temperature": ["required", "numeric", "min:-100", "max:100"],
+            "wind_speed": ["required", "numeric", "min:0", "max:1000"]
+        }
+    },
+    {
+        "topic": "%u/%d/sensor/OWM/dailyWeather",
+        "qoS": 2,
+        "frequency-Event": "24h",
+        "retain": false,
+        "description": "Fichier JSON sur les données météorologique du jour",
+        "format": {
+            "humidity": ["required", "numeric", "min:0", "max:100"],
+            "rainfall": ["required", "numeric", "min:0", "max:1000"],
+            "pressure": ["required", "numeric", "min:800", "max:1200"],
+            "temperature": ["required", "numeric", "min:-100", "max:100"],
+            "temperature_max": ["required", "numeric", "min:-100", "max:100"],
+            "temperature_min": ["required", "numeric", "min:-100", "max:100"],
+            "wind_speed": ["required", "numeric", "min:0", "max:100"]
+        }
+    },
+    {
+        "topic": "%u/%d/actuator/irrignnov_V1/state",
+        "qoS": 2,
+        "frequency-Event": "event",
+        "retain": true,
+        "description": "Etat de l'irrigation",
+        "format": ["required", "boolean"]
+    },
+    {
+        "topic": "%u/%d/actuator/irrignnov_V1/last_irrigation_begin",
+        "qoS": 2,
+        "frequency-Event": "event",
+        "retain": false,
+        "description": "Heure du début de la dernière irrigation",
+        "format": ["required", "integer", "min:1"]
+    },
+    {
+        "topic": "%u/%d/actuator/irrignnov_V1/last_irrigation_end",
+        "qoS": 2,
+        "frequency-Event": "event",
+        "retain": false,
+        "description": "Heure de la fin de la dernière irrigation",
+        "format": ["required", "integer", "min:1"]
+    },
+    {
+        "topic": "%u/%d/actuator/irrignnov_V1/method",
+        "qoS": 2,
+        "frequency-Event": "event",
+        "retain": true,
+        "description": "Sélection de la méthode d'irrigation (2 : goutte à goutte, 1: asperseur, 0 : désactivé l'irrigation)",
+        "format": ["required", "in:0,1,2"]
+    },
+    {
+        "topic": "%u/%d/actuator/irrignnov_V1/kc",
+        "qoS": 2,
+        "frequency-Event": "event",
+        "retain": true,
+        "description": "Valeur du coefficient cultural",
+        "format": ["required", "numeric", "min:0", "max:2"]
+    },
+    {
+        "topic": "%u/%d/actuator/irrignnov_V1/drip",
+        "qoS": 2,
+        "frequency-Event": "event",
+        "retain": true,
+        "description": "Vecteur de 3 valeurs pour le paramétrage goutte à goutte",
+        "format": [
+            ["required", "numeric", "min:0", "max:100"],
+            ["required", "integer", "min:0", "max:1000"],
+            ["required", "integer", "min:0", "max:1000"]
+        ]
+    },
+    {
+        "topic": "%u/%d/actuator/irrignnov_V1/sprinkler",
+        "qoS": 2,
+        "frequency-Event": "event",
+        "retain": true,
+        "description": "Vecteur de 4 valeurs pour le paramétrage asperseur",
+        "format": [
+            ["required", "numeric", "min:0", "max:100"],
+            ["required", "integer", "min:0", "max:10000"],
+            ["required", "integer", "min:0", "max:10000"],
+            ["required", "numeric", "min:0", "max:20"]
+        ]
+    },
+    {
+        "topic": "%u/%d/actuator/irrignnov_V1/time",
+        "qoS": 2,
+        "frequency-Event": "event",
+        "retain": true,
+        "description": "Heure d'irrigation",
+        "format": ["required", "date_format:hh:mm"]
+    },
+    {
+        "topic": "%u/%d/actuator/irrignnov_V1/frequence",
+        "qoS": 2,
+        "frequency-Event": "event",
+        "retain": true,
+        "description": "Fréquence d'irrigation ( en jour(s) )",
+        "format": ["required", "integer"]
+    },
+    {
+        "topic": "%u/%d/global/crop",
+        "qoS": 2,
+        "frequency-Event": "event",
+        "retain": true,
+        "description": "Nom de la culture actuel",
+        "format": ["required", "string"]
+    },
+    {
+        "topic": "%u/%d/global/position",
+        "qoS": 2,
+        "frequency-Event": "event",
+        "retain": true,
+        "description": "Position du champ Vecteur de 2 (Latitude et Longitude)",
+        "format": [
+            ["required", "numeric"],
+            ["required", "numeric"]
+        ]
+    },
+    {
+        "topic": "%u/%d/global/area",
+        "qoS": 2,
+        "frequency-Event": "event",
+        "retain": true,
+        "description": "Surface de la parcelle en m²",
+        "format": ["required", "numeric", "min:0", "max:1000000"]
+    },
+    {
+        "topic": "%u/%d/sensor/irrignnov_V1/etm",
+        "qoS": 2,
+        "frequency-Event": "24h",
+        "retain": false,
+        "description": "Valeur de l'évapotranspiration du jour",
+        "format": ["required", "numeric", "min:-1000", "max:1000"]
+    },
+    {
+        "topic": "%u/%d/sensor/irrignnov_V1/prediction",
+        "qoS": 2,
+        "frequency-Event": "1h",
+        "retain": true,
+        "description": "Fichier JSON des prévisions d'irrigation de la semaines",
+        "format": {
+            "ET0": ["required"],
+            "ET0.*": ["required", "numeric", "min:-1000", "max:1000"],
+            "ETM": ["required"],
+            "ETM.*": ["required", "numeric", "min:-1000", "max:1000"],
+            "rain": ["required"],
+            "rain.*": ["required", "numeric", "min:0", "max:1000"]
+        }
+    }
+]
