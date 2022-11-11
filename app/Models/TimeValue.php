@@ -10,9 +10,4 @@ class TimeValue extends Model
     use HasFactory;
 
     public $guarded = ['id'];
-
-    public function iotData()
-    {
-        return $this->belongsTo(IotData::class);
-    }
 }

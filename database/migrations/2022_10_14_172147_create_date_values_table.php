@@ -1,35 +1,25 @@
 <?php
 
+use Database\Concerns\IotDataValue;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    use IotDataValue;
+
     public function up()
     {
-        Schema::create('date_values', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('iot_data_id');
-            $table->foreign('iot_data_id')->references('id')->on('iot_data');
-            $table->timestamps();
+        $this->create(config('iot-data.tables-map.date'));
 
+        Schema::table(config('iot-data.tables-map.date'), function (Blueprint $table) {
             $table->date('value');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('date_values');
+        Schema::dropIfExists(config('iot-data.tables-map.date'));
     }
 };

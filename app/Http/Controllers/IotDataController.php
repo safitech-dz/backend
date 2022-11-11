@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\IotData;
 use App\Packages\IotDataService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -18,27 +17,22 @@ class IotDataController extends Controller
 
         $data = Validator::make(
             [
-                'message' => $request->message
+                'message' => $request->message,
             ],
             [
                 'message' => $def['format'],
             ]
         )->validate();
 
-        $model_class = config("iot-models-map." . $def['type']);
-
-        $iot_data = IotData::create([
-            'type_of_value' => $def['type'],
-            'topic' => $request->topic,
-        ]);
+        $model_class = config('iot-data.models-map.'.$def['type']);
 
         /** @var Model */
         $iot_value = $model_class::create([
-            'iot_data_id' => $iot_data->id,
-            'value' => $data['message']
+            'value' => $data['message'],
+            'topic' => $iot_data_service->getCannonicalTopic(),
+            'topic_user_id' => $iot_data_service->getTopicUserId(),
+            'topic_client_id' => $iot_data_service->getTopicClientId(),
         ]);
-
-        $iot_value->setRelation('iotData', $iot_data);
 
         return $iot_value;
     }

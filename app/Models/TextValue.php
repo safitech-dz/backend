@@ -10,9 +10,4 @@ class TextValue extends Model
     use HasFactory;
 
     public $guarded = ['id'];
-
-    public function iotData()
-    {
-        return $this->belongsTo(IotData::class);
-    }
 }
