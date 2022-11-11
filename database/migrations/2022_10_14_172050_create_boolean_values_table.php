@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bool_values', function (Blueprint $table) {
+        Schema::create('boolean_values', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('iot_data_id');
             $table->foreign('iot_data_id')->references('id')->on('iot_data');

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BoolValue extends Model
+class BooleanValue extends Model
 {
     use HasFactory;
 

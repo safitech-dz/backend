@@ -13,12 +13,12 @@ class IotData extends Model
 
     public function booleanValues()
     {
-        return $this->hasMany(BoolValue::class);
+        return $this->hasMany(BooleanValue::class);
     }
 
-    public function intValues()
+    public function integerValues()
     {
-        return $this->hasMany(IntValue::class);
+        return $this->hasMany(IntegerValue::class);
     }
 
     public function floatValues()
