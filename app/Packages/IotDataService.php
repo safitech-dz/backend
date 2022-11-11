@@ -21,7 +21,7 @@ class IotDataService
 
         $this->setCannonicalTopic();
 
-        $this->topics_dictionnary = json_decode(file_get_contents(__DIR__ . "/topcis.json"), true);
+        $this->topics_dictionnary = json_decode(file_get_contents(__DIR__ . "/topics_directory.json"), true);
     }
 
     protected function setCannonicalTopic()

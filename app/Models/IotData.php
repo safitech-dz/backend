@@ -9,6 +9,8 @@ class IotData extends Model
 {
     use HasFactory;
 
+    public $guarded = ['id'];
+
     public function booleanValues()
     {
         return $this->hasMany(BoolValue::class);
