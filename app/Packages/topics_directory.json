@@ -109,8 +109,8 @@
         "frequency_event": "event",
         "retain": true,
         "description": "Heure d'irrigation",
-        "type": "string",
-        "format": ["required", "date_format:hh:mm"]
+        "type": "time",
+        "format": ["required", "date_format:H:i"]
     },
     {
         "topic": "%u/%d/actuator/irrignnov_V1/frequence",
