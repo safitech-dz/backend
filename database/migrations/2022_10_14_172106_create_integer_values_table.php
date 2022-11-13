@@ -14,7 +14,7 @@ return new class extends Migration
         $this->create(config('iot-data.tables-map.integer'));
 
         Schema::table(config('iot-data.tables-map.integer'), function (Blueprint $table) {
-            $table->integer('value');
+            $table->bigInteger('value');
         });
     }
 
