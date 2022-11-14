@@ -10,7 +10,7 @@ class IotDataService
 
     protected string $topic;
 
-    protected string $message;
+    protected string|array $message;
 
     protected string $topic_user_id;
 

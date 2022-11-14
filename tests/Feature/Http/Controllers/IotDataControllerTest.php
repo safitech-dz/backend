@@ -10,7 +10,8 @@ use Tests\TestCase;
 
 class IotDataControllerTest extends TestCase
 {
-    use WithFaker, RefreshDatabase;
+    use WithFaker;
+    use RefreshDatabase;
 
     /**
      * @test
@@ -23,7 +24,10 @@ class IotDataControllerTest extends TestCase
         $body = $bodyGenerator($this->faker);
 
         $response = $this->post('/api/iot-data', $body)
+            ->assertJsonMissingValidationErrors()
             ->assertCreated();
+
+        // dump(json_decode($response->getContent(), true));
     }
 
     public function requests_bodies()

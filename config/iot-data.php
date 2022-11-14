@@ -9,6 +9,7 @@ return [
         'string' => App\Models\StringValue::class,
         'text' => App\Models\TextValue::class,
         'time' => App\Models\TimeValue::class,
+        'json' => App\Models\JsonValue::class,
     ],
 
     'tables-map' => [
@@ -19,6 +20,6 @@ return [
         'string' => 'string_values',
         'text' => 'text_values',
         'time' => 'time_values',
-
+        'json' => 'json_values',
     ],
 ];
