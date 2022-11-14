@@ -168,12 +168,15 @@
         "description": "Fichier JSON des prévisions d'irrigation de la semaines",
         "type": "json",
         "format": {
-            "ET0": ["required"],
-            "ET0.*": ["required", "numeric", "min:-1000", "max:1000"],
-            "ETM": ["required"],
-            "ETM.*": ["required", "numeric", "min:-1000", "max:1000"],
-            "rain": ["required"],
-            "rain.*": ["required", "numeric", "min:0", "max:1000"]
+            "ET0": {
+                "*": ["required", "numeric", "min:-1000", "max:1000"]
+            },
+            "ETM": {
+                "*": ["required", "numeric", "min:-1000", "max:1000"]
+            },
+            "rain": {
+                "*": ["required", "numeric", "min:0", "max:1000"]
+            }
         }
     }
 ]

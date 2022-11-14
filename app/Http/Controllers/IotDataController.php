@@ -15,13 +15,11 @@ class IotDataController extends Controller
 
         $def = $iot_data_service->getTopicDefinition();
 
+        $rules = $this->structureNestedValidationRulesKeys($def['format']);
+
         $data = Validator::make(
-            [
-                'message' => $request->message,
-            ],
-            [
-                'message' => $def['format'],
-            ]
+            ['message' => $request->message],
+            $rules
         )->validate();
 
         $model_class = config('iot-data.models-map.'.$def['type']);
@@ -35,5 +33,63 @@ class IotDataController extends Controller
         ]);
 
         return $iot_value;
+    }
+
+    protected function structureNestedValidationRulesKeys(array $rules, string $parent_key = 'message'): array
+    {
+        if ($this->isArrayOfStrings($rules)) {
+            /**
+             * Rules entry
+             * Example: ['required', 'integer']
+             */
+            return [$parent_key => $rules];
+        }
+
+        /**
+         * [
+         *      'entry' => ['required', 'boolean'],
+         *      'entry2' => [
+         *          '*' => [''nullable', 'integer']
+         *      ]
+         * ]
+         */
+        foreach ($rules as $key => $rule) {
+            $nested_rules = $this->structureNestedValidationRulesKeys($rule, $key);
+
+            foreach ($nested_rules as $key => $value) {
+                $rules["$parent_key.$key"] = $value;
+            }
+            /**
+             * (1) $rules["message.entry"] = ['required', 'boolean']
+             */
+
+            /**
+             * (1) unset $rules["entry"]
+             */
+            unset($rules[$key]);
+        }
+
+        $rules[$parent_key] = ['required', 'array'];
+
+        return $rules;
+    }
+
+    /**
+     * True if array contains only strings
+     */
+    protected function isArrayOfStrings(array $arr): bool
+    {
+        if (empty($arr)) {
+            // ! Abnormal case: throw or log
+            return false;
+        }
+
+        foreach ($arr as $value) {
+            if (! is_string($value)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

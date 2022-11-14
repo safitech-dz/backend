@@ -86,8 +86,8 @@ class IotDataControllerTest extends TestCase
             '%u/%d/actuator/irrignnov_V1/sprinkler' => [fn (Generator $faker): array => [
                 'topic' => '%u/%d/actuator/irrignnov_V1/sprinkler',
                 'message' => [
-                    $faker->numberBetween(0, 100),
-                    $faker->randomFloat(2, 0, 10000),
+                    $faker->randomFloat(2, 0, 100),
+                    $faker->numberBetween(0, 10000),
                     $faker->numberBetween(0, 10000),
                     $faker->randomFloat(2, 0, 20),
                 ],
@@ -106,7 +106,10 @@ class IotDataControllerTest extends TestCase
             ]],
             '%u/%d/global/position' => [fn (Generator $faker): array => [
                 'topic' => '%u/%d/global/position',
-                'message' => $faker->localCoordinates(),
+                'message' => [
+                    $faker->randomFloat(),
+                    $faker->randomFloat(),
+                ],
             ]],
             '%u/%d/global/area' => [fn (Generator $faker): array => [
                 'topic' => '%u/%d/global/area',
