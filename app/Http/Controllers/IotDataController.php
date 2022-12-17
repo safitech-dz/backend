@@ -11,7 +11,7 @@ class IotDataController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $iot_data_service = new IotDataService($request);
+        $iot_data_service = new IotDataService($request->topic, $request->message);
 
         $def = $iot_data_service->getTopicDefinition();
 

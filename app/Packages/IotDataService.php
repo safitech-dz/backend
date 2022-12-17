@@ -2,17 +2,11 @@
 
 namespace App\Packages;
 
-use Illuminate\Http\Request;
-
 class IotDataService
 {
     protected string $canonical_topic;
 
     protected array $topic_definition;
-
-    protected string $topic;
-
-    protected string|array $message;
 
     protected string $topic_user_id;
 
@@ -20,12 +14,9 @@ class IotDataService
 
     protected IotTopics $topics_dictionnary;
 
-    public function __construct(Request $request)
+    public function __construct(protected string $topic, protected string|array $message)
     {
         $this->topics_dictionnary = new IotTopics();
-
-        $this->topic = $request->topic;
-        $this->message = $request->message;
 
         $this->setCannonicalTopic();
 
