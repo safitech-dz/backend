@@ -8,6 +8,8 @@ class IotDataService
 {
     protected string $canonical_topic;
 
+    protected array $topic_definition;
+
     protected string $topic;
 
     protected string|array $message;
@@ -16,16 +18,18 @@ class IotDataService
 
     protected string $topic_client_id;
 
-    protected array $topics_dictionnary;
+    protected IotTopics $topics_dictionnary;
 
     public function __construct(Request $request)
     {
+        $this->topics_dictionnary = new IotTopics();
+
         $this->topic = $request->topic;
         $this->message = $request->message;
 
         $this->setCannonicalTopic();
 
-        $this->topics_dictionnary = json_decode(file_get_contents(__DIR__.'/topics_directory.json'), true);
+        $this->topic_definition = $this->topics_dictionnary->getTopicDefinition($this->canonical_topic);
     }
 
     protected function setCannonicalTopic()
@@ -58,16 +62,6 @@ class IotDataService
 
     public function getTopicDefinition()
     {
-        $topic_definition = array_filter($this->topics_dictionnary, fn ($entry) => $entry['topic'] === $this->canonical_topic);
-
-        if (count($topic_definition) > 1) {
-            throw new \Exception('A topic name must only identify one topic definition [UNIQUE]');
-        }
-
-        if (count($topic_definition) === 0) {
-            return [];
-        }
-
-        return array_values($topic_definition)[0];
+        return $this->topic_definition;
     }
 }
