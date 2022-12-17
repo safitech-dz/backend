@@ -18,5 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', LoginController::class)->name('login');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('iot-data', IotDataController::class);
+    Route::post('iot-data', [IotDataController::class, 'store']);
+    Route::get('iot-data/{topic}', [IotDataController::class, 'query'])->where('topic', '[A-Za-z0-9\\/_]+');
 });

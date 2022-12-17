@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class IotDataController extends Controller
 {
-    public function __invoke(Request $request)
+    public function store(Request $request)
     {
         $iot_data_service = new IotDataService($request->topic, $request->message);
 
@@ -33,6 +33,17 @@ class IotDataController extends Controller
         ]);
 
         return $iot_value;
+    }
+
+    public function query(string $topic)
+    {
+        $iot_data_service = new IotDataService('%u/%d/'.$topic, '');
+
+        $def = $iot_data_service->getTopicDefinition();
+
+        $model_class = config('iot-data.models-map.'.$def['type']);
+
+        return $model_class::where('topic', '%u/%d/'.$topic)->get();
     }
 
     protected function structureNestedValidationRulesKeys(array $rules, string $parent_key = 'message'): array
