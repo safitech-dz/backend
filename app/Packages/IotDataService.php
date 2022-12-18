@@ -12,11 +12,11 @@ class IotDataService
 
     protected string $topic_client_id;
 
-    protected IotTopics $topics_dictionnary;
+    protected TopicsCollection $topics_dictionnary;
 
     public function __construct(protected string $topic, protected string|array $message)
     {
-        $this->topics_dictionnary = new IotTopics();
+        $this->topics_dictionnary = new TopicsCollection();
 
         $this->setCannonicalTopic();
 
