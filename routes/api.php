@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\IotDataController;
+use App\Http\Controllers\TopicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +21,6 @@ Route::post('login', LoginController::class)->name('login');
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('iot-data', [IotDataController::class, 'store']);
     Route::get('iot-data/{topic}', [IotDataController::class, 'query'])->where('topic', '[A-Za-z0-9\\/_]+');
+
+    Route::apiResource('topics', TopicController::class);
 });
