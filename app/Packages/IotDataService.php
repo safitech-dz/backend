@@ -12,28 +12,14 @@ class IotDataService
 
     protected string $topic_client_id;
 
-    protected TopicsCollection $topics_dictionnary;
-
     public function __construct(protected string $topic, protected string|array $message)
-    {
-        $this->topics_dictionnary = new TopicsCollection();
-
-        $this->setCannonicalTopic();
-
-        $this->topic_definition = $this->topics_dictionnary->getTopicDefinition($this->canonical_topic);
-    }
-
-    protected function setCannonicalTopic()
     {
         $topic = explode('/', $this->topic);
 
-        $this->topic_user_id = $topic[0];
-        $this->topic_client_id = $topic[1];
+        $this->topic_user_id = array_unshift($topic);
+        $this->topic_client_id = array_unshift($topic);
 
-        $topic[0] = '%u';
-        $topic[1] = '%d';
-
-        $this->canonical_topic = implode('/', $topic);
+        $this->canonical_topic = implode('/', ['%u', '%d'] + $topic);
     }
 
     public function getCannonicalTopic()
@@ -49,10 +35,5 @@ class IotDataService
     public function getTopicClientId()
     {
         return $this->topic_client_id;
-    }
-
-    public function getTopicDefinition()
-    {
-        return $this->topic_definition;
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Topic;
 use App\Packages\IotDataService;
-use App\Packages\TopicsCollection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,16 +15,16 @@ class IotDataController extends Controller
     {
         $iot_data_service = new IotDataService($request->topic, $request->message);
 
-        $def = $iot_data_service->getTopicDefinition();
+        $topic = Topic::where('topic', $iot_data_service->getCannonicalTopic())->first() ?? throw new ModelNotFoundException("Topic {$iot_data_service->getCannonicalTopic()} not found");
 
-        $rules = $this->structureNestedValidationRulesKeys($def['format']);
+        $rules = $this->structureNestedValidationRulesKeys($topic->format);
 
         $data = Validator::make(
             ['message' => $request->message],
             $rules
         )->validate();
 
-        $model_class = config('iot-data.models-map.'.$def['type']);
+        $model_class = config("iot-data.models-map.{$topic->type}");
 
         /** @var Model */
         $iot_value = $model_class::create([
@@ -36,14 +37,14 @@ class IotDataController extends Controller
         return $iot_value;
     }
 
-    // TODO add topic Table/model and bind on route using topic string
-    public function query(string $topic, TopicsCollection $topics_collection)
+    // TODO bind on route using topic string
+    public function query(string $topic)
     {
-        $topic = $topics_collection->getTopicDefinition("%u/%d/$topic");
+        $topic = Topic::where('topic', "%u/%d/$topic")->first() ?? throw new ModelNotFoundException("Topic $topic not found");
 
-        $model_class = config("iot-data.models-map.{$topic['type']}");
+        $model_class = config("iot-data.models-map.{$topic->type}");
 
-        return $model_class::where('topic', $topic['topic'])->get();
+        return $model_class::where('topic', $topic->topic)->get();
     }
 
     protected function structureNestedValidationRulesKeys(array $rules, string $parent_key = 'message'): array
