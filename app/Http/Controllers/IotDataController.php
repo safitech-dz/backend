@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Topic;
-use App\Packages\IotDataService;
+use App\Packages\ParsedTopic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -13,9 +13,9 @@ class IotDataController extends Controller
 {
     public function store(Request $request)
     {
-        $iot_data_service = new IotDataService($request->topic, $request->message);
+        $parsed_topic = new ParsedTopic($request->topic);
 
-        $topic = Topic::where('topic', $iot_data_service->getCannonicalTopic())->first() ?? throw new ModelNotFoundException("Topic {$iot_data_service->getCannonicalTopic()} not found");
+        $topic = Topic::where('topic', $parsed_topic->getCanonicalTopic())->first() ?? throw new ModelNotFoundException("Topic {$parsed_topic->getCanonicalTopic()} not found");
 
         $rules = $this->structureNestedValidationRulesKeys($topic->format);
 
@@ -29,9 +29,9 @@ class IotDataController extends Controller
         /** @var Model */
         $iot_value = $model_class::create([
             'value' => $data['message'],
-            'topic' => $iot_data_service->getCannonicalTopic(),
-            'topic_user_id' => $iot_data_service->getTopicUserId(),
-            'topic_client_id' => $iot_data_service->getTopicClientId(),
+            'topic' => $parsed_topic->getCanonicalTopic(),
+            'topic_user_id' => $parsed_topic->getUserId(),
+            'topic_client_id' => $parsed_topic->getClientId(),
         ]);
 
         return $iot_value;
