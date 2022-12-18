@@ -19,6 +19,8 @@ class IotDataControllerTest extends TestCase
      */
     public function store(Closure $bodyGenerator)
     {
+        $this->importTopics();
+
         $this->authenticate();
 
         $body = $bodyGenerator($this->faker);
