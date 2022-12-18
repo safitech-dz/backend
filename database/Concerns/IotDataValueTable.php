@@ -5,7 +5,7 @@ namespace Database\Concerns;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-trait IotDataValue
+trait IotDataValueTable
 {
     public function create(string $table_name)
     {
@@ -16,6 +16,8 @@ trait IotDataValue
             $table->string('topic');
             $table->string('topic_user_id');
             $table->string('topic_client_id');
+
+            $table->foreign('topic')->references('topic')->on('topics');
         });
     }
 }
