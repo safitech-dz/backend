@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Topic;
 use App\Packages\ParsedTopic;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,9 +12,9 @@ class IotDataController extends Controller
 {
     public function store(Request $request)
     {
-        $parsed_topic = new ParsedTopic($request->topic);
+        $parsed_topic = app(ParsedTopic::class, ['topic' => $request->topic]);
 
-        $topic = Topic::where('topic', $parsed_topic->getCanonicalTopic())->first() ?? throw new ModelNotFoundException("Topic {$parsed_topic->getCanonicalTopic()} not found");
+        $topic = Topic::where('topic', $parsed_topic->getCanonicalTopic())->firstOrFail();
 
         $rules = $this->structureNestedValidationRulesKeys($topic->format);
 
@@ -37,11 +36,8 @@ class IotDataController extends Controller
         return $iot_value;
     }
 
-    // TODO bind on route using topic string
-    public function query(string $topic)
+    public function query(Topic $topic)
     {
-        $topic = Topic::where('topic', "%u/%d/$topic")->first() ?? throw new ModelNotFoundException("Topic $topic not found");
-
         $model_class = config("iot-data.models-map.{$topic->type}");
 
         return $model_class::where('topic', $topic->topic)->get();
