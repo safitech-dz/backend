@@ -28,8 +28,11 @@ class TopicsImportService
             $stored_topic = Topic::where('topic', $topic['topic'])->first();
 
             if ($stored_topic) {
-                // TODO: update if dirty
-                Topic::where('topic', $topic['topic'])->update($topic);
+                $stored_topic->fill($topic);
+
+                dump($stored_topic->getDirty());
+
+                $stored_topic->save();
             } else {
                 Topic::create($topic);
             }

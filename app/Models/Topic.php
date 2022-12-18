@@ -14,6 +14,7 @@ class Topic extends Model
 
     protected $casts = [
         'format' => 'array',
+        'retain' => 'boolean',
     ];
 
     // --------------------------------------------
