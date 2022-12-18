@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Topic;
 use Exception;
 use Illuminate\Console\Command;
 
@@ -34,7 +35,17 @@ class TopicsImport extends Command
             throw new Exception('Cannot parse the JSON');
         }
 
-        dump($topics);
+        // TODO: add validation
+        foreach ($topics as $topic) {
+            $stored_topic = Topic::where('topic', $topic['topic'])->first();
+
+            if ($stored_topic) {
+                // TODO: update if dirty
+                Topic::where('topic', $topic['topic'])->update($topic);
+            } else {
+                Topic::create($topic);
+            }
+        }
 
         return Command::SUCCESS;
     }
