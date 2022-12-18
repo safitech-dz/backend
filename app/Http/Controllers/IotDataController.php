@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Packages\IotDataService;
+use App\Packages\TopicsCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -35,15 +36,14 @@ class IotDataController extends Controller
         return $iot_value;
     }
 
-    public function query(string $topic)
+    // TODO add topic Table/model and bind on route using topic string
+    public function query(string $topic, TopicsCollection $topics_collection)
     {
-        $iot_data_service = new IotDataService('%u/%d/'.$topic, '');
+        $topic = $topics_collection->getTopicDefinition("%u/%d/$topic");
 
-        $def = $iot_data_service->getTopicDefinition();
+        $model_class = config("iot-data.models-map.{$topic['type']}");
 
-        $model_class = config('iot-data.models-map.'.$def['type']);
-
-        return $model_class::where('topic', '%u/%d/'.$topic)->get();
+        return $model_class::where('topic', $topic['topic'])->get();
     }
 
     protected function structureNestedValidationRulesKeys(array $rules, string $parent_key = 'message'): array

@@ -19,7 +19,7 @@ class TopicsCollection
      *
      * @throws Exception
      */
-    public function getTopicDefinition(string $topic): array
+    public function getTopicDefinition(string $topic): Collection|bool
     {
         $topic_definition = $this->topics_dictionnary->filter(fn ($entry) => $entry['topic'] === $topic);
 
@@ -28,9 +28,9 @@ class TopicsCollection
         }
 
         if ($topic_definition->count() === 0) {
-            return [];
+            return false;
         }
 
-        return $topic_definition->first();
+        return collect($topic_definition->first());
     }
 }
