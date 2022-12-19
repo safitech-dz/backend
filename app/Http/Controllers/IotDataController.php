@@ -18,7 +18,7 @@ class IotDataController extends Controller
 
         $data = Validator::make(
             $request->only('message'),
-            $topic->format
+            $topic->rules
         )->validate();
 
         $model_class = config("iot-data.models-map.{$topic->type}");
