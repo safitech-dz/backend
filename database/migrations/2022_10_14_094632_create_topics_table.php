@@ -31,9 +31,8 @@ return new class extends Migration
                 'boolean', 'date', 'float', 'integer', 'string', 'text', 'time', 'json',
             ]);
 
-            // TODO: name it validation
             // ? use JSON column
-            $table->text('format');
+            $table->text('rules');
         });
     }
 

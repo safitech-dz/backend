@@ -13,7 +13,7 @@ class Topic extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'format' => 'array',
+        'rules' => 'array',
         'retain' => 'boolean',
     ];
 
