@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Topic;
 use App\Packages\ParsedTopic;
-use App\Packages\TopicFormatToRules;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,8 +17,8 @@ class IotDataController extends Controller
         $topic = Topic::where('topic', $parsed_topic->getCanonicalTopic())->firstOrFail();
 
         $data = Validator::make(
-            ['message' => $request->message],
-            app(TopicFormatToRules::class, ['format' => $topic->format])->getRules()
+            $request->only('message'),
+            $topic->format
         )->validate();
 
         $model_class = config("iot-data.models-map.{$topic->type}");
