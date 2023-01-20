@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Validator;
  */
 class IotDataController extends Controller
 {
-
     /**
      * Store IOT data
      *

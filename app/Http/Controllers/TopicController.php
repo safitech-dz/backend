@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
  */
 class TopicController extends Controller
 {
-
     /**
      * List topics
      *
