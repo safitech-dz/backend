@@ -41,3 +41,13 @@ php artisan optimize:clear
 ```bash
 php artisan migrate:fresh --seed
 ```
+
+## APIs docs
+
+Run:
+
+```bash
+php artisan scribe:generate
+```
+
+Open `api-docs\index.html` in a browser.
