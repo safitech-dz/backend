@@ -267,6 +267,7 @@ INTRO,
     'example_languages' => [
         // 'bash',
         // 'javascript',
+        'json',
     ],
 
     /**

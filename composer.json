@@ -10,7 +10,6 @@
     "require": {
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
-        "knuckleswtf/scribe": "^4.10",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7"
@@ -19,6 +18,7 @@
         "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.2",
+        "knuckleswtf/scribe": "^4.10",
         "laravel/sail": "^1.0.1",
         "laravel/telescope": "^4.9",
         "mockery/mockery": "^1.4.4",
