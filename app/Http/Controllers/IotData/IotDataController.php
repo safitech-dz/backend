@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\IotData;
 
 use App\Models\Topic;
-use App\Packages\ParsedTopic;
-use Illuminate\Database\Eloquent\Model;
+use App\Packages\IotData\Topics\ParsedTopic;
+use App\Packages\IotData\Values\DataEntityMapper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -36,7 +36,7 @@ class IotDataController
      *     "id": 5
      * }
      */
-    public function store(Request $request)
+    public function store(Request $request, DataEntityMapper $data_entity_mapper)
     {
         $parsed_topic = app(ParsedTopic::class, ['topic' => $request->topic]);
 
@@ -47,15 +47,14 @@ class IotDataController
             $topic->rules
         )->validate();
 
-        $model_class = config("iot-data.models-map.{$topic->type}");
+        $iot_value = $data_entity_mapper->getModelInstance($topic->type);
 
-        /** @var Model */
-        $iot_value = $model_class::create([
+        $iot_value->fill([
             'value' => $data['message'],
             'topic' => $parsed_topic->getCanonicalTopic(),
             'topic_user_id' => $parsed_topic->getUserId(),
             'topic_client_id' => $parsed_topic->getClientId(),
-        ]);
+        ])->save();
 
         return $iot_value;
     }
