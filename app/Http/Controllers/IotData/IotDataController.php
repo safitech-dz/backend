@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\IotData;
 
 use App\Models\Topic;
 use App\Packages\ParsedTopic;
@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * @group IotData
+ * @group IotData\IotData
  */
-class IotDataController extends Controller
+class IotDataController
 {
     /**
      * Store IOT data

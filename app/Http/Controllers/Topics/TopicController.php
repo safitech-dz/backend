@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Topics;
 
 use App\Models\Topic;
 use Illuminate\Http\Request;
 
 /**
- * @group Topic
+ * @group Topics\Topic
  */
-class TopicController extends Controller
+class TopicController
 {
     /**
      * List topics
