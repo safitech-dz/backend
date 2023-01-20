@@ -20,8 +20,10 @@ class TopicsImport extends Command
     /**
      * @return int
      */
-    public function handle(TopicsImportService $topics_import_service)
+    public function handle()
     {
+        $topics_import_service = app()->make(TopicsImportService::class, ['command' => $this]);
+
         $topics_import_service->consume($this->argument('source'));
 
         return Command::SUCCESS;
