@@ -37,7 +37,7 @@ Body
 @if ($endpoint->headers['Content-Type'] == 'application/x-www-form-urlencoded')
 {!! http_build_query($endpoint->cleanBodyParameters, '', '&') !!}
 @else
-{!! json_encode($endpoint->cleanBodyParameters, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) !!}
+{!! json_encode($endpoint->cleanBodyParameters, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) !!}
 ```
 @endif
 @endif
