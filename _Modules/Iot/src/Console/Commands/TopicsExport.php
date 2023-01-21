@@ -17,8 +17,10 @@ class TopicsExport extends Command
      */
     public function handle()
     {
-        Storage::disk('public')->put(
-            'topics_directory_'.time().'.json',
+        $json_name = 'topics_directory_'.time().'.json';
+
+        Storage::put(
+            $json_name,
             json_encode(
                 Topic::all()
                     ->makeHidden(['id', 'created_at', 'updated_at'])
@@ -26,6 +28,9 @@ class TopicsExport extends Command
                 JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
             )
         );
+
+        $this->line('Topics exported to file:');
+        $this->info(Storage::path($json_name));
 
         return Command::SUCCESS;
     }

@@ -20,6 +20,8 @@ class TopicsImport extends Command
 
         $topics_import_service->consume($this->argument('source'));
 
+        $this->line('Topics import done');
+
         return Command::SUCCESS;
     }
 }
