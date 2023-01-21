@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('topics', function (Blueprint $table) {
@@ -27,6 +22,7 @@ return new class extends Migration
 
             $table->text('description')->nullable();
 
+            // TODO: refactor enum value
             $table->enum('type', [
                 'boolean', 'date', 'float', 'integer', 'string', 'text', 'time', 'json',
             ]);
@@ -36,13 +32,8 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('topics');
+        throw new Exception('No rolling back');
     }
 };
