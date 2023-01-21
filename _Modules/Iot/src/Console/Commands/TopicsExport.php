@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Safitech\Iot\Console\Commands;
 
 use Illuminate\Console\Command;
 use Safitech\Iot\Models\Topic;

@@ -10,6 +10,6 @@ class IotSerivceProvider extends ServiceProvider
     {
         $this->app->register(MigrationServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
-        // $this->app->register(AuthServiceProvider::class);
+        $this->app->register(CommandServiceProvider::class);
     }
 }

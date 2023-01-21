@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace Safitech\Iot\Services;
 
 use Exception;
 use Illuminate\Console\Command;

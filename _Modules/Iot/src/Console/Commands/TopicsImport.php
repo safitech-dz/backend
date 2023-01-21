@@ -1,20 +1,14 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Safitech\Iot\Console\Commands;
 
-use App\Services\TopicsImportService;
 use Illuminate\Console\Command;
+use Safitech\Iot\Services\TopicsImportService;
 
 class TopicsImport extends Command
 {
-    /**
-     * @var string
-     */
     protected $signature = 'topics:import {source}';
 
-    /**
-     * @var string
-     */
     protected $description = 'Import topics from JSON';
 
     /**
