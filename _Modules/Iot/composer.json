@@ -1,0 +1,22 @@
+{
+    "name": "safitech/iot",
+    "autoload": {
+        "psr-4": {
+            "Safitech\\Iot\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "medilies",
+            "email": "medilies.contact@gmail.com"
+        }
+    ],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Safitech\\Iot\\Providers\\IotSerivceProvider"
+            ]
+        }
+    }
+}
