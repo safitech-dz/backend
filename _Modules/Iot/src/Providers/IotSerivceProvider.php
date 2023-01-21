@@ -2,6 +2,7 @@
 
 namespace Safitech\Iot\Providers;
 
+use App\Packages\IotData\Values\DataEntityMapper;
 use Illuminate\Support\ServiceProvider;
 
 class IotSerivceProvider extends ServiceProvider
@@ -11,5 +12,7 @@ class IotSerivceProvider extends ServiceProvider
         $this->app->register(MigrationServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(CommandServiceProvider::class);
+
+        $this->app->singleton(DataEntityMapper::class, fn () => new DataEntityMapper());
     }
 }

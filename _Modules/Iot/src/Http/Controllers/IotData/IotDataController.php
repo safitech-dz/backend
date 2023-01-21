@@ -145,6 +145,6 @@ class IotDataController
      */
     public function query(Topic $topic, DataEntityMapper $data_entity_mapper)
     {
-        return $data_entity_mapper->getModelName($topic->type)::where('topic', $topic->topic)->get();
+        return $data_entity_mapper->getModelInstance($topic->type)->where('topic', $topic->topic)->get();
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
 
 return new class extends Migration
 {
@@ -12,20 +13,17 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('topic')->unique();
+            $table->string('topic', 255)->unique();
 
             $table->tinyInteger('qos');
 
             $table->boolean('retain');
 
-            $table->string('frequency_event')->nullable();
+            $table->string('frequency_event', 255)->nullable();
 
             $table->text('description')->nullable();
 
-            // TODO: refactor enum value
-            $table->enum('type', [
-                'boolean', 'date', 'float', 'integer', 'string', 'text', 'time', 'json',
-            ]);
+            $table->enum('type', app()->make(DataEntityMapper::class)->value_types);
 
             // ? use JSON column
             $table->text('rules');
