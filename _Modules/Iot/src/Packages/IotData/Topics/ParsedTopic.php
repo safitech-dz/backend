@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Packages\IotData\Topics;
+namespace Safitech\Iot\Packages\IotData\Topics;
 
 class ParsedTopic
 {

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\IotData;
 
 use App\Models\Topic;
-use App\Packages\IotData\Topics\ParsedTopic;
-use App\Packages\IotData\Values\DataEntityMapper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Safitech\Iot\Packages\IotData\Topics\ParsedTopic;
+use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
 
 /**
  * @group IotData\IotData

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Packages\IotData\Values;
+namespace Safitech\Iot\Packages\IotData\Values;
 
 use Illuminate\Database\Eloquent\Model;
 
