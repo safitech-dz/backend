@@ -20,8 +20,10 @@ class TopicsExport extends Command
         Storage::disk('public')->put(
             'topics_directory_'.time().'.json',
             json_encode(
-                Topic::all()->toArray(), // TODO: do something about ['id', 'created_at', 'updated_at']
-                JSON_UNESCAPED_UNICODE + JSON_PRETTY_PRINT + JSON_UNESCAPED_SLASHES
+                Topic::all()
+                    ->makeHidden(['id', 'created_at', 'updated_at'])
+                    ->toArray(),
+                JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
             )
         );
 
