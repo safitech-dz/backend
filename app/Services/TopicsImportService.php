@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class TopicsImportService
 {
-    public function __construct(protected Command $command)
+    public function __construct(protected ?Command $command = null)
     {
     }
 
@@ -82,11 +82,19 @@ class TopicsImportService
 
     protected function reportCreatedTopic(Topic $created_topic): void
     {
+        if (is_null($this->command)) {
+            return;
+        }
+
         $this->command->info("Created topic ID:{$created_topic->id} => {$created_topic->topic}");
     }
 
     protected function reportUpdatedTopic(Topic $stored_topic): void
     {
+        if (is_null($this->command)) {
+            return;
+        }
+
         $this->command->warn("Updated topic ID:{$stored_topic->id} => {$stored_topic->topic}");
 
         $console_table = $this->makeDirtyTopicTable($stored_topic);

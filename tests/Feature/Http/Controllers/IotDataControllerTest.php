@@ -15,6 +15,7 @@ class IotDataControllerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider  requests_bodies
      */
     public function store(Closure $bodyGenerator)

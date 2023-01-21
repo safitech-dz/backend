@@ -31,7 +31,6 @@ class LoginController extends Controller
      *     },
      *     "token": "2|esqlJ2VkZUpGQTVyeCLK7ez1owzkRe0zmdgBhRS7"
      * }
-     *
      * @response status=401 scenario=bad_credentials
      * {
      *     "message": "Bad credentials"
