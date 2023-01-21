@@ -2854,9 +2854,16 @@
             "dist": {
                 "type": "path",
                 "url": "./_Modules/Iot",
-                "reference": "18320d3a27b8754866c0caae312511811c37f9fe"
+                "reference": "8c516d8d334550c39b20708e80d69dec9db8d8af"
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Safitech\\Iot\\Providers\\IotSerivceProvider"
+                    ]
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Safitech\\Iot\\": "src/"
@@ -2865,7 +2872,7 @@
             "authors": [
                 {
                     "name": "medilies",
-                    "email": "medilies@gmail.com"
+                    "email": "medilies.contact@gmail.com"
                 }
             ],
             "transport-options": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Topics;
+namespace Safitech\Iot\Http\Controllers\Topics;
 
 use App\Models\Topic;
 use Illuminate\Http\Request;

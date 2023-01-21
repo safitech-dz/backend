@@ -11,5 +11,12 @@
             "email": "medilies.contact@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Safitech\\Iot\\Providers\\IotSerivceProvider"
+            ]
+        }
+    }
 }
