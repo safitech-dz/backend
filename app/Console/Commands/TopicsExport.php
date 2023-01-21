@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Topic;
 use Illuminate\Console\Command;
+use Safitech\Iot\Models\Topic;
 use Storage;
 
 class TopicsExport extends Command

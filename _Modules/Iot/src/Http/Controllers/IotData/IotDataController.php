@@ -2,9 +2,9 @@
 
 namespace Safitech\Iot\Http\Controllers\IotData;
 
-use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Safitech\Iot\Models\Topic;
 use Safitech\Iot\Packages\IotData\Topics\ParsedTopic;
 use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
 

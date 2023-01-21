@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\Topic;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Safitech\Iot\Models\Topic;
 
 class TopicsImportService
 {

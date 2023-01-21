@@ -2,8 +2,8 @@
 
 namespace Safitech\Iot\Http\Controllers\Topics;
 
-use App\Models\Topic;
 use Illuminate\Http\Request;
+use Safitech\Iot\Models\Topic;
 
 /**
  * @group Topics\Topic

@@ -13,14 +13,14 @@ class DataEntityMapper
     public function __construct()
     {
         $this->models_map = [
-            'boolean' => \App\Models\BooleanValue::class,
-            'date' => \App\Models\DateValue::class,
-            'float' => \App\Models\FloatValue::class,
-            'integer' => \App\Models\IntegerValue::class,
-            'string' => \App\Models\StringValue::class,
-            'text' => \App\Models\TextValue::class,
-            'time' => \App\Models\TimeValue::class,
-            'json' => \App\Models\JsonValue::class,
+            'boolean' => \Safitech\Iot\Models\BooleanValue::class,
+            'date' => \Safitech\Iot\Models\DateValue::class,
+            'float' => \Safitech\Iot\Models\FloatValue::class,
+            'integer' => \Safitech\Iot\Models\IntegerValue::class,
+            'string' => \Safitech\Iot\Models\StringValue::class,
+            'text' => \Safitech\Iot\Models\TextValue::class,
+            'time' => \Safitech\Iot\Models\TimeValue::class,
+            'json' => \Safitech\Iot\Models\JsonValue::class,
         ];
 
         $this->tables_map = [

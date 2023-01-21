@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace Safitech\Iot\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Safitech\Iot\Database\Factories\BooleanValueFactory;
 
 class BooleanValue extends Model
 {
@@ -11,8 +12,8 @@ class BooleanValue extends Model
 
     public $guarded = ['id'];
 
-    public function iotData()
+    protected static function newFactory()
     {
-        return $this->belongsTo(IotData::class);
+        return BooleanValueFactory::new();
     }
 }
