@@ -16,19 +16,18 @@ return new class extends Migration
 
     protected function create(string $table_name, callable $value_column_callback)
     {
-        Schema::create($table_name, function (Blueprint $table) {
+        Schema::create($table_name, function (Blueprint $table) use ($value_column_callback) {
             $table->id();
             $table->timestamps();
 
-            $table->string('topic');
-            $table->string('topic_user_id');
-            $table->string('topic_client_id');
+            $table->string('topic', 255);
+            $table->string('topic_user_id', 255);
+            $table->string('topic_client_id', 255);
 
             $table->foreign('topic')->references('topic')->on('topics');
-        });
 
-        // TODO: move $value_column_callback to Schema::create
-        Schema::table($table_name, $value_column_callback);
+            call_user_func_array($value_column_callback, [$table]);
+        });
     }
 
     public function up()
@@ -58,7 +57,7 @@ return new class extends Migration
         });
 
         $this->create($this->data_entity_mapper->getTableName('string'), function (Blueprint $table) {
-            $table->string('value');
+            $table->string('value', 255);
         });
 
         $this->create($this->data_entity_mapper->getTableName('json'), function (Blueprint $table) {
