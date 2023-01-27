@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('topic')->unique();
+            $table->string('canonical_topic')->unique();
 
             $table->tinyInteger('qos');
 

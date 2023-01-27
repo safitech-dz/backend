@@ -1,6 +1,6 @@
 [
     {
-        "topic": "%u/%d/sensor/OWM/actualWeather",
+        "canonical_topic": "%u/%d/sensor/OWM/actualWeather",
         "qos": 2,
         "frequency_event": "1h",
         "retain": true,
@@ -16,7 +16,7 @@
         }
     },
     {
-        "topic": "%u/%d/sensor/OWM/dailyWeather",
+        "canonical_topic": "%u/%d/sensor/OWM/dailyWeather",
         "qos": 2,
         "frequency_event": "24h",
         "retain": false,
@@ -34,7 +34,7 @@
         }
     },
     {
-        "topic": "%u/%d/actuator/irrignnov_V1/state",
+        "canonical_topic": "%u/%d/actuator/irrignnov_V1/state",
         "qos": 2,
         "frequency_event": "event",
         "retain": true,
@@ -45,7 +45,7 @@
         }
     },
     {
-        "topic": "%u/%d/actuator/irrignnov_V1/last_irrigation_begin",
+        "canonical_topic": "%u/%d/actuator/irrignnov_V1/last_irrigation_begin",
         "qos": 2,
         "frequency_event": "event",
         "retain": false,
@@ -56,7 +56,7 @@
         }
     },
     {
-        "topic": "%u/%d/actuator/irrignnov_V1/last_irrigation_end",
+        "canonical_topic": "%u/%d/actuator/irrignnov_V1/last_irrigation_end",
         "qos": 2,
         "frequency_event": "event",
         "retain": false,
@@ -67,7 +67,7 @@
         }
     },
     {
-        "topic": "%u/%d/actuator/irrignnov_V1/method",
+        "canonical_topic": "%u/%d/actuator/irrignnov_V1/method",
         "qos": 2,
         "frequency_event": "event",
         "retain": true,
@@ -78,7 +78,7 @@
         }
     },
     {
-        "topic": "%u/%d/actuator/irrignnov_V1/kc",
+        "canonical_topic": "%u/%d/actuator/irrignnov_V1/kc",
         "qos": 2,
         "frequency_event": "event",
         "retain": true,
@@ -89,7 +89,7 @@
         }
     },
     {
-        "topic": "%u/%d/actuator/irrignnov_V1/drip",
+        "canonical_topic": "%u/%d/actuator/irrignnov_V1/drip",
         "qos": 2,
         "frequency_event": "event",
         "retain": true,
@@ -103,7 +103,7 @@
         }
     },
     {
-        "topic": "%u/%d/actuator/irrignnov_V1/sprinkler",
+        "canonical_topic": "%u/%d/actuator/irrignnov_V1/sprinkler",
         "qos": 2,
         "frequency_event": "event",
         "retain": true,
@@ -118,7 +118,7 @@
         }
     },
     {
-        "topic": "%u/%d/actuator/irrignnov_V1/time",
+        "canonical_topic": "%u/%d/actuator/irrignnov_V1/time",
         "qos": 2,
         "frequency_event": "event",
         "retain": true,
@@ -129,7 +129,7 @@
         }
     },
     {
-        "topic": "%u/%d/actuator/irrignnov_V1/frequence",
+        "canonical_topic": "%u/%d/actuator/irrignnov_V1/frequence",
         "qos": 2,
         "frequency_event": "event",
         "retain": true,
@@ -140,7 +140,7 @@
         }
     },
     {
-        "topic": "%u/%d/global/crop",
+        "canonical_topic": "%u/%d/global/crop",
         "qos": 2,
         "frequency_event": "event",
         "retain": true,
@@ -151,7 +151,7 @@
         }
     },
     {
-        "topic": "%u/%d/global/position",
+        "canonical_topic": "%u/%d/global/position",
         "qos": 2,
         "frequency_event": "event",
         "retain": true,
@@ -164,7 +164,7 @@
         }
     },
     {
-        "topic": "%u/%d/global/area",
+        "canonical_topic": "%u/%d/global/area",
         "qos": 2,
         "frequency_event": "event",
         "retain": true,
@@ -175,7 +175,7 @@
         }
     },
     {
-        "topic": "%u/%d/sensor/irrignnov_V1/etm",
+        "canonical_topic": "%u/%d/sensor/irrignnov_V1/etm",
         "qos": 2,
         "frequency_event": "24h",
         "retain": false,
@@ -186,7 +186,7 @@
         }
     },
     {
-        "topic": "%u/%d/sensor/irrignnov_V1/prediction",
+        "canonical_topic": "%u/%d/sensor/irrignnov_V1/prediction",
         "qos": 2,
         "frequency_event": "1h",
         "retain": true,

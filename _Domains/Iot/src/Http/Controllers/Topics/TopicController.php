@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Safitech\Iot\Models\Topic;
 
 /**
- * @group Topics\Topic
+ * @group Topics
  */
 class TopicController
 {
@@ -19,7 +19,7 @@ class TopicController
      *        "id": 1,
      *        "created_at": "2022-12-20T17:16:45.000000Z",
      *        "updated_at": "2022-12-20T17:16:45.000000Z",
-     *        "topic": "%u/%d/sensor/OWM/actualWeather",
+     *        "canonical_topic": "%u/%d/sensor/OWM/actualWeather",
      *        "qos": 2,
      *        "retain": true,
      *        "frequency_event": "1h",
@@ -66,7 +66,7 @@ class TopicController
      *        "id": 2,
      *        "created_at": "2022-12-20T17:16:45.000000Z",
      *        "updated_at": "2022-12-20T17:16:45.000000Z",
-     *        "topic": "%u/%d/sensor/OWM/dailyWeather",
+     *        "canonical_topic": "%u/%d/sensor/OWM/dailyWeather",
      *        "qos": 2,
      *        "retain": false,
      *        "frequency_event": "24h",
@@ -125,7 +125,7 @@ class TopicController
      *        "id": 3,
      *        "created_at": "2022-12-20T17:16:45.000000Z",
      *        "updated_at": "2022-12-20T17:16:45.000000Z",
-     *        "topic": "%u/%d/actuator/irrignnov_V1/state",
+     *        "canonical_topic": "%u/%d/actuator/irrignnov_V1/state",
      *        "qos": 2,
      *        "retain": true,
      *        "frequency_event": "event",
@@ -142,7 +142,7 @@ class TopicController
      *        "id": 4,
      *        "created_at": "2022-12-20T17:16:45.000000Z",
      *        "updated_at": "2022-12-20T17:16:45.000000Z",
-     *        "topic": "%u/%d/actuator/irrignnov_V1/last_irrigation_begin",
+     *        "canonical_topic": "%u/%d/actuator/irrignnov_V1/last_irrigation_begin",
      *        "qos": 2,
      *        "retain": false,
      *        "frequency_event": "event",
@@ -160,7 +160,7 @@ class TopicController
      *        "id": 5,
      *        "created_at": "2022-12-20T17:16:45.000000Z",
      *        "updated_at": "2022-12-20T17:16:45.000000Z",
-     *        "topic": "%u/%d/actuator/irrignnov_V1/last_irrigation_end",
+     *        "canonical_topic": "%u/%d/actuator/irrignnov_V1/last_irrigation_end",
      *        "qos": 2,
      *        "retain": false,
      *        "frequency_event": "event",
@@ -178,7 +178,7 @@ class TopicController
      *        "id": 6,
      *        "created_at": "2022-12-20T17:16:45.000000Z",
      *        "updated_at": "2022-12-20T17:16:45.000000Z",
-     *        "topic": "%u/%d/actuator/irrignnov_V1/method",
+     *        "canonical_topic": "%u/%d/actuator/irrignnov_V1/method",
      *        "qos": 2,
      *        "retain": true,
      *        "frequency_event": "event",
@@ -216,7 +216,7 @@ class TopicController
      *    "id": 10,
      *    "created_at": "2022-12-20T17:16:45.000000Z",
      *    "updated_at": "2022-12-20T17:16:45.000000Z",
-     *    "topic": "%u/%d/actuator/irrignnov_V1/time",
+     *    "canonical_topic": "%u/%d/actuator/irrignnov_V1/time",
      *    "qos": 2,
      *    "retain": true,
      *    "frequency_event": "event",

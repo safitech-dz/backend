@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
-                ->group(base_path('_Modules/Iot/src/routes/api.php'));
+                ->group(base_path('_Domains/Iot/src/routes/api.php'));
         });
     }
 }
