@@ -18,20 +18,24 @@ return new class extends Migration
     {
         Schema::create($table_name, function (Blueprint $table) use ($value_column_callback) {
             $table->id();
-            $table->timestamps();
-
-            $table->string('topic', 255);
-            $table->string('topic_user_id', 255);
-            $table->string('topic_client_id', 255);
-
-            $table->foreign('topic')->references('topic')->on('topics');
-
+            $table->foreignId('iot_message_id')->constrained()->cascadeOnDelete();
             call_user_func_array($value_column_callback, [$table]);
         });
     }
 
     public function up()
     {
+        Schema::create('iot_messages', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+
+            $table->string('topic'); // TODO: name canonical_topic
+            $table->string('topic_user_id');
+            $table->string('topic_client_id');
+
+            $table->foreign('topic')->references('topic')->on('topics'); // ? refernce id (canonical_topic is simpler for querying)
+        });
+
         $this->create($this->data_entity_mapper->getTableName('boolean'), function (Blueprint $table) {
             $table->boolean('value');
         });
@@ -57,7 +61,7 @@ return new class extends Migration
         });
 
         $this->create($this->data_entity_mapper->getTableName('string'), function (Blueprint $table) {
-            $table->string('value', 255);
+            $table->string('value');
         });
 
         $this->create($this->data_entity_mapper->getTableName('json'), function (Blueprint $table) {
