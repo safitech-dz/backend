@@ -26,7 +26,7 @@ class IotDataControllerTest extends TestCase
 
         $body = $bodyGenerator($this->faker);
 
-        $response = $this->post('/api/iot-data', $body)
+        $response = $this->post('/api/iot/messages', $body)
             ->assertJsonMissingValidationErrors()
             ->assertCreated();
 

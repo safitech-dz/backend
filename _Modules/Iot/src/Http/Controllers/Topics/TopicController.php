@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Safitech\Iot\Models\Topic;
 
 /**
- * @group Topics\Topic
+ * @group Topics
  */
 class TopicController
 {
