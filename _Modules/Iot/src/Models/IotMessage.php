@@ -2,18 +2,12 @@
 
 namespace Safitech\Iot\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Safitech\Iot\Database\Factories\IotMessageFactory;
-
-class IotMessage extends Model
+class IotMessage extends BaseIotModel
 {
-    use HasFactory;
-
-    public $guarded = ['id'];
-
-    protected static function newFactory()
+    public function topic()
     {
-        return IotMessageFactory::new();
+        return $this->belongsTo(Topic::class, 'topic', 'topic');
     }
+
+    //  TODO: hasMany values
 }

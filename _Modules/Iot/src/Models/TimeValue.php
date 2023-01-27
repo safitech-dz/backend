@@ -2,18 +2,6 @@
 
 namespace Safitech\Iot\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Safitech\Iot\Database\Factories\TimeValueFactory;
-
-class TimeValue extends Model
+class TimeValue extends BaseIotValueModel
 {
-    use HasFactory;
-
-    public $guarded = ['id'];
-
-    protected static function newFactory()
-    {
-        return TimeValueFactory::new();
-    }
 }
