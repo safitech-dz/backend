@@ -79,84 +79,39 @@ class IotDataController
      * @response status=200 scenario=success
      * [
      *     {
-     *         "id": 1,
-     *         "created_at": "2022-12-20T17:27:38.000000Z",
-     *         "updated_at": "2022-12-20T17:27:38.000000Z",
-     *         "topic": "%u/%d/sensor/OWM/actualWeather",
-     *         "topic_user_id": "simulator",
-     *         "topic_client_id": "simulator",
-     *         "value": {
-     *             "humidity": 55,
-     *             "rainfall": 200,
-     *             "pressure": 900,
-     *             "temperature": 24,
-     *             "wind_speed": 60
-     *         }
-     *     },
-     *     {
      *         "id": 2,
-     *         "created_at": "2022-12-20T17:35:38.000000Z",
-     *         "updated_at": "2022-12-20T17:35:38.000000Z",
+     *         "created_at": "2023-01-27T15:52:24.000000Z",
+     *         "updated_at": "2023-01-27T15:52:24.000000Z",
      *         "topic": "%u/%d/sensor/OWM/actualWeather",
      *         "topic_user_id": "simulator",
      *         "topic_client_id": "simulator",
-     *         "value": {
-     *             "humidity": 55,
-     *             "rainfall": 200,
-     *             "pressure": 900,
-     *             "temperature": 24,
-     *             "wind_speed": 60
-     *         }
+     *         "value": "{\"humidity\":55,\"rainfall\":200,\"pressure\":900,\"temperature\":24,\"wind_speed\":60}"
      *     },
      *     {
-     *         "id": 3,
-     *         "created_at": "2022-12-20T17:36:20.000000Z",
-     *         "updated_at": "2022-12-20T17:36:20.000000Z",
+     *         "id": 8,
+     *         "created_at": "2023-01-27T15:54:37.000000Z",
+     *         "updated_at": "2023-01-27T15:54:37.000000Z",
      *         "topic": "%u/%d/sensor/OWM/actualWeather",
      *         "topic_user_id": "simulator",
      *         "topic_client_id": "simulator",
-     *         "value": {
-     *             "humidity": 55,
-     *             "rainfall": 200,
-     *             "pressure": 900,
-     *             "temperature": 24,
-     *             "wind_speed": 60
-     *         }
-     *     },
-     *     {
-     *         "id": 4,
-     *         "created_at": "2022-12-20T17:36:59.000000Z",
-     *         "updated_at": "2022-12-20T17:36:59.000000Z",
-     *         "topic": "%u/%d/sensor/OWM/actualWeather",
-     *         "topic_user_id": "simulator",
-     *         "topic_client_id": "simulator",
-     *         "value": {
-     *             "humidity": 55,
-     *             "rainfall": 200,
-     *             "pressure": 900,
-     *             "temperature": 24,
-     *             "wind_speed": 60
-     *         }
-     *     },
-     *     {
-     *         "id": 5,
-     *         "created_at": "2023-01-20T14:59:24.000000Z",
-     *         "updated_at": "2023-01-20T14:59:24.000000Z",
-     *         "topic": "%u/%d/sensor/OWM/actualWeather",
-     *         "topic_user_id": "simulator",
-     *         "topic_client_id": "simulator",
-     *         "value": {
-     *             "humidity": 55,
-     *             "rainfall": 200,
-     *             "pressure": 900,
-     *             "temperature": 24,
-     *             "wind_speed": 60
-     *         }
+     *         "value": "{\"humidity\":55,\"rainfall\":200,\"pressure\":900,\"temperature\":24,\"wind_speed\":60}"
      *     }
      * ]
      */
     public function query(Topic $topic, DataEntityMapper $data_entity_mapper)
     {
-        return $data_entity_mapper->getModelInstance($topic->type)->where('topic', $topic->topic)->get();
+        return IotMessage
+            ::join(
+                $data_entity_mapper->getTableName($topic->type),
+                'iot_messages.id',
+                '=',
+                $data_entity_mapper->getTableName($topic->type) . '.iot_message_id'
+            )
+            ->select(
+                'iot_messages.*',
+                $data_entity_mapper->getTableName($topic->type) . '.value',
+            )
+            ->where('topic', $topic->topic)
+            ->get();
     }
 }
