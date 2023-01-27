@@ -5,6 +5,7 @@ namespace Safitech\Iot\Http\Controllers\Messages;
 use Safitech\Iot\Models\IotMessage;
 use Safitech\Iot\Models\Topic;
 use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
+use Safitech\Iot\Packages\Queries\UnionIotMessageValuesQuery;
 
 /**
  * @group Messages
@@ -13,6 +14,11 @@ use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
  */
 class MessageQueryController
 {
+    public function all(UnionIotMessageValuesQuery $union_iot_message_values_query)
+    {
+        return $union_iot_message_values_query->all();
+    }
+
     /**
      * Get IOT data
      *

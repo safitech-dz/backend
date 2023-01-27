@@ -14,5 +14,6 @@ Route::middleware('auth:sanctum')
 
         Route::controller(MessageQueryController::class)->group(function () {
             Route::get('iot-data/{topic}', 'query');
+            Route::get('iot-data', 'all');
         });
     });
