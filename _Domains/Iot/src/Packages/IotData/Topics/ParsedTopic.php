@@ -2,65 +2,55 @@
 
 namespace Safitech\Iot\Packages\IotData\Topics;
 
+use Exception;
+
 class ParsedTopic
 {
-    protected string $topic;
+    protected string $user_id;
 
-    protected ?string $user_id = null;
+    protected string $client_id;
 
-    protected ?string $client_id = null;
+    protected string $canonical;
 
-    protected string $base_topic;
+    public function __construct(
+        protected string $real
+    ) {
+        $t = explode('/', $real);
 
-    protected string $canonical_topic;
-
-    public function __construct(string $topic, bool $complete = true)
-    {
-        $this->topic = $topic;
-
-        if ($complete) {
-            $t = explode('/', $topic);
-
-            // TODO: validate
-            $this->user_id = array_shift($t);
-
-            // TODO: validate
-            $this->client_id = array_shift($t);
-
-            // TODO: validate
-            $this->base_topic = implode('/', $t);
-        } else {
-            $this->base_topic = $topic;
+        if (count($t) < 3) {
+            throw new Exception('A valid topic cannot contain less than 3 parts');
         }
 
-        $this->canonical_topic = "%u/%d/{$this->base_topic}";
+        // * if canonical_topic shapes changes use regex to match %u & %d
+
+        $this->user_id = array_shift($t);
+
+        $this->client_id = array_shift($t);
+
+        $base = implode('/', $t);
+
+        $this->canonical = "%u/%d/{$base}";
     }
 
-    public function getUserId(): string|null
+    public function getUserId(): string
     {
         return $this->user_id;
     }
 
-    public function getClientId(): string|null
+    public function getClientId(): string
     {
         return $this->client_id;
     }
 
-    public function getBaseTopic(): string
+    public function getCanonical(): string
     {
-        return $this->base_topic;
+        return $this->canonical;
     }
 
-    public function getCanonicalTopic(): string
+    public function isCanonical(): bool
     {
-        return $this->canonical_topic;
-    }
-
-    public static function isCanonical(string $topic): bool
-    {
-        $topic = explode('/', $topic);
-
-        if (count($topic) > 2 && $topic[0] === '%u' && $topic[1] === '%d') {
+        // ? continue using OR
+        if ($this->user_id === '%u' || $this->client_id === '%d') {
             return true;
         }
 
@@ -70,11 +60,10 @@ class ParsedTopic
     public function toArray(): array
     {
         return [
-            'topic' => $this->topic,
-            'user_id' => $this->user_id,
-            'client_id' => $this->client_id,
-            'base_topic' => $this->base_topic,
-            'canonical_topic' => $this->canonical_topic,
+            'real_topic' => $this->real,
+            'canonical_topic' => $this->canonical,
+            'topic_user_id' => $this->user_id,
+            'topic_client_id' => $this->client_id,
         ];
     }
 }

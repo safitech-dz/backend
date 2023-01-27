@@ -45,9 +45,11 @@ class MessageController
      */
     public function store(Request $request, DataEntityMapper $data_entity_mapper)
     {
-        $parsed_topic = app(ParsedTopic::class, ['topic' => $request->topic]);
+        $request->validate(['real_topic' => ['required'], 'message' => ['required']]);
 
-        $topic = Topic::where('canonical_topic', $parsed_topic->getCanonicalTopic())->firstOrFail();
+        $parsed_topic = app(ParsedTopic::class, ['real' => $request->real_topic]);
+
+        $topic = Topic::where('canonical_topic', $parsed_topic->getCanonical())->firstOrFail();
 
         $data = Validator::make(
             $request->only('message'),
@@ -55,7 +57,7 @@ class MessageController
         )->validate();
 
         $iot_message = IotMessage::create([
-            'canonical_topic' => $parsed_topic->getCanonicalTopic(),
+            'canonical_topic' => $parsed_topic->getCanonical(),
             'topic_user_id' => $parsed_topic->getUserId(),
             'topic_client_id' => $parsed_topic->getClientId(),
         ]);
