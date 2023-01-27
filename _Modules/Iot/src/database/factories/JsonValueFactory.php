@@ -2,13 +2,8 @@
 
 namespace Safitech\Iot\Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Safitech\Iot\Models\JsonValue;
-
-class JsonValueFactory extends Factory
+class JsonValueFactory extends BaseIotFactory
 {
-    protected $model = JsonValue::class;
-
     public function definition()
     {
         return [

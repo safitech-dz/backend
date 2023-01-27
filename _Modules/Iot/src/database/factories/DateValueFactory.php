@@ -2,17 +2,12 @@
 
 namespace Safitech\Iot\Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Safitech\Iot\Models\DateValue;
-
-class DateValueFactory extends Factory
+class DateValueFactory extends BaseIotFactory
 {
-    protected $model = DateValue::class;
-
     public function definition()
     {
         return [
-            //
+            'value' => $this->faker->date(),
         ];
     }
 }

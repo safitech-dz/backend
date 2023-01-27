@@ -2,17 +2,12 @@
 
 namespace Safitech\Iot\Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Safitech\Iot\Models\BooleanValue;
-
-class BooleanValueFactory extends Factory
+class BooleanValueFactory extends BaseIotFactory
 {
-    protected $model = BooleanValue::class;
-
     public function definition()
     {
         return [
-            //
+            'value' => $this->faker->boolean(),
         ];
     }
 }

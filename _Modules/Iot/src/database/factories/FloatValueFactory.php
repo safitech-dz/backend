@@ -2,17 +2,12 @@
 
 namespace Safitech\Iot\Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Safitech\Iot\Models\FloatValue;
-
-class FloatValueFactory extends Factory
+class FloatValueFactory extends BaseIotFactory
 {
-    protected $model = FloatValue::class;
-
     public function definition()
     {
         return [
-            //
+            'value' => $this->faker->randomFloat(1, 0, 2),
         ];
     }
 }
