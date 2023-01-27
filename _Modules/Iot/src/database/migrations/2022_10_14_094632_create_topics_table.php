@@ -13,13 +13,13 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('topic', 255)->unique();
+            $table->string('topic')->unique();
 
             $table->tinyInteger('qos');
 
             $table->boolean('retain');
 
-            $table->string('frequency_event', 255)->nullable();
+            $table->string('frequency_event')->nullable();
 
             $table->text('description')->nullable();
 

@@ -33,7 +33,8 @@ return new class extends Migration
             $table->string('topic_user_id');
             $table->string('topic_client_id');
 
-            $table->foreign('topic')->references('topic')->on('topics'); // ? refernce id (canonical_topic is simpler for querying)
+            // ? refernce id (canonical_topic is simpler for querying)
+            $table->foreign('topic')->references('topic')->on('topics');
         });
 
         $this->create($this->data_entity_mapper->getTableName('boolean'), function (Blueprint $table) {

@@ -100,16 +100,16 @@ class IotDataController
      */
     public function query(Topic $topic, DataEntityMapper $data_entity_mapper)
     {
-        return IotMessage
-            ::join(
-                $data_entity_mapper->getTableName($topic->type),
-                'iot_messages.id',
-                '=',
-                $data_entity_mapper->getTableName($topic->type) . '.iot_message_id'
-            )
+        return IotMessage::join(
+            $data_entity_mapper->getTableName($topic->type),
+            'iot_messages.id',
+            '=',
+            $data_entity_mapper->getTableName($topic->type).'.iot_message_id'
+        )
             ->select(
                 'iot_messages.*',
-                $data_entity_mapper->getTableName($topic->type) . '.value',
+                // TODO: fix casting
+                $data_entity_mapper->getTableName($topic->type).'.value',
             )
             ->where('topic', $topic->topic)
             ->get();
