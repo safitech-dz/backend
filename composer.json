@@ -33,7 +33,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "./_Modules/Iot"
+            "url": "./_Domains/Iot"
         }
     ],
     "autoload": {
