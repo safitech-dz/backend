@@ -34,7 +34,7 @@ class MessageController
      *     "iot_message_id": 8,
      *     "id": 2,
      *     "iot_message": {
-     *         "topic": "%u/%d/sensor/OWM/actualWeather",
+     *         "canonical_topic": "%u/%d/sensor/OWM/actualWeather",
      *         "topic_user_id": "simulator",
      *         "topic_client_id": "simulator",
      *         "updated_at": "2023-01-27T15:54:37.000000Z",
@@ -47,7 +47,7 @@ class MessageController
     {
         $parsed_topic = app(ParsedTopic::class, ['topic' => $request->topic]);
 
-        $topic = Topic::where('topic', $parsed_topic->getCanonicalTopic())->firstOrFail();
+        $topic = Topic::where('canonical_topic', $parsed_topic->getCanonicalTopic())->firstOrFail();
 
         $data = Validator::make(
             $request->only('message'),
@@ -55,7 +55,7 @@ class MessageController
         )->validate();
 
         $iot_message = IotMessage::create([
-            'topic' => $parsed_topic->getCanonicalTopic(),
+            'canonical_topic' => $parsed_topic->getCanonicalTopic(),
             'topic_user_id' => $parsed_topic->getUserId(),
             'topic_client_id' => $parsed_topic->getClientId(),
         ]);

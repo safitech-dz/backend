@@ -21,7 +21,7 @@ class TopicsImportService
 
         DB::transaction(function () use ($import_topics) {
             foreach ($import_topics as $import_topic) {
-                $stored_topic = Topic::where('topic', $import_topic['topic'])->first();
+                $stored_topic = Topic::where('canonical_topic', $import_topic['canonical_topic'])->first();
 
                 if ($stored_topic) {
                     $this->updateTopic($import_topic, $stored_topic);
@@ -86,7 +86,7 @@ class TopicsImportService
             return;
         }
 
-        $this->command->info("Created topic ID:{$created_topic->id} => {$created_topic->topic}");
+        $this->command->info("Created topic ID:{$created_topic->id} => {$created_topic->canonical_topic}");
     }
 
     protected function reportUpdatedTopic(Topic $stored_topic): void
@@ -95,7 +95,7 @@ class TopicsImportService
             return;
         }
 
-        $this->command->warn("Updated topic ID:{$stored_topic->id} => {$stored_topic->topic}");
+        $this->command->warn("Updated topic ID:{$stored_topic->id} => {$stored_topic->canonical_topic}");
 
         $console_table = $this->makeDirtyTopicTable($stored_topic);
 

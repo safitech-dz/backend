@@ -24,7 +24,7 @@ class MessageQueryController
      *         "id": 2,
      *         "created_at": "2023-01-27T15:52:24.000000Z",
      *         "updated_at": "2023-01-27T15:52:24.000000Z",
-     *         "topic": "%u/%d/sensor/OWM/actualWeather",
+     *         "canonical_topic": "%u/%d/sensor/OWM/actualWeather",
      *         "topic_user_id": "simulator",
      *         "topic_client_id": "simulator",
      *         "value": "{\"humidity\":55,\"rainfall\":200,\"pressure\":900,\"temperature\":24,\"wind_speed\":60}"
@@ -33,7 +33,7 @@ class MessageQueryController
      *         "id": 8,
      *         "created_at": "2023-01-27T15:54:37.000000Z",
      *         "updated_at": "2023-01-27T15:54:37.000000Z",
-     *         "topic": "%u/%d/sensor/OWM/actualWeather",
+     *         "canonical_topic": "%u/%d/sensor/OWM/actualWeather",
      *         "topic_user_id": "simulator",
      *         "topic_client_id": "simulator",
      *         "value": "{\"humidity\":55,\"rainfall\":200,\"pressure\":900,\"temperature\":24,\"wind_speed\":60}"
@@ -53,7 +53,7 @@ class MessageQueryController
                 // TODO: fix casting
                 $data_entity_mapper->getTableName($topic->type).'.value',
             )
-            ->where('topic', $topic->topic)
+            ->where('canonical_topic', $topic->canonical_topic)
             ->get();
     }
 }
