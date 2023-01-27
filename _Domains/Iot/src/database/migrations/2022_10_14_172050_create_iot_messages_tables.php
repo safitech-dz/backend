@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('topic_client_id');
 
             // ? refernce id (canonical_topic is simpler for querying)
-            // ? cascade
+            // TODO: cascade?
             $table->foreign('canonical_topic')->references('canonical_topic')->on('topics');
         });
 

@@ -17,7 +17,7 @@ use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
 class MessageController
 {
     /**
-     * Store IOT data
+     * Store IOT message
      *
      * @bodyParam topic  string required  Example: simulator/simulator/sensor/OWM/actualWeather
      * @bodyParam message object required  Example: {"humidity":55,"rainfall":200,"pressure":900,"temperature":24,"wind_speed":60}

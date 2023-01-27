@@ -22,6 +22,6 @@ abstract class TestCase extends BaseTestCase
     protected function importTopics()
     {
         app()->make(TopicsImportService::class, ['command' => null])
-            ->consume(__DIR__ . './../topics_directory.json');
+            ->consume(__DIR__.'./../topics_directory.json');
     }
 }
