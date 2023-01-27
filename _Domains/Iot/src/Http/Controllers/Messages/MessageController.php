@@ -56,11 +56,7 @@ class MessageController
             $topic->rules
         )->validate();
 
-        $iot_message = IotMessage::create([
-            'canonical_topic' => $parsed_topic->getCanonical(),
-            'topic_user_id' => $parsed_topic->getUserId(),
-            'topic_client_id' => $parsed_topic->getClientId(),
-        ]);
+        $iot_message = IotMessage::create($parsed_topic->toArray());
 
         $iot_value = $data_entity_mapper->getModelInstance($topic->type);
 

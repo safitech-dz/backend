@@ -60,7 +60,6 @@ class ParsedTopic
     public function toArray(): array
     {
         return [
-            'real_topic' => $this->real,
             'canonical_topic' => $this->canonical,
             'topic_user_id' => $this->user_id,
             'topic_client_id' => $this->client_id,
