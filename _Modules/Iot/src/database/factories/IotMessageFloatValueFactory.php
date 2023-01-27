@@ -2,12 +2,12 @@
 
 namespace Safitech\Iot\Database\Factories;
 
-class TextValueFactory extends BaseIotFactory
+class IotMessageFloatValueFactory extends BaseIotFactory
 {
     public function definition()
     {
         return [
-            'value' => $this->faker->paragraph(),
+            'value' => $this->faker->randomFloat(1, 0, 2),
         ];
     }
 }

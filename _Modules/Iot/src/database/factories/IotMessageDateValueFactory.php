@@ -2,7 +2,7 @@
 
 namespace Safitech\Iot\Database\Factories;
 
-class DateValueFactory extends BaseIotFactory
+class IotMessageDateValueFactory extends BaseIotFactory
 {
     public function definition()
     {
