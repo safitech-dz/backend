@@ -60,8 +60,8 @@ class MessageQueryController
      *     }
      * ]
      */
-    public function __invoke(IotMessageValuesFetcher $union_iot_message_values_query)
+    public function __invoke(IotMessageValuesFetcher $iot_message_values_fetcher)
     {
-        return $union_iot_message_values_query->all();
+        return $iot_message_values_fetcher->get();
     }
 }

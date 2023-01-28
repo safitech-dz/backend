@@ -22,7 +22,7 @@ class IotMessageValuesFetcher
         $this->value_types = $data_entity_mapper->value_types;
     }
 
-    public function all()
+    public function get()
     {
         /** @var SpatieQueryBuilder */
         $query = app()->make(
