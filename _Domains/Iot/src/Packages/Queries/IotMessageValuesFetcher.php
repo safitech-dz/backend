@@ -2,6 +2,7 @@
 
 namespace Safitech\Iot\Packages\Queries;
 
+use Illuminate\Database\Query\Builder;
 use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
 use Safitech\Iot\Packages\IotData\Values\IotMessageValueCaster;
 use Safitech\Iot\Packages\Queries\Builders\UnionQueryIotMessageValues;
@@ -20,14 +21,15 @@ class IotMessageValuesFetcher
 
     public function all()
     {
-        $messages =
-            $this->union_query_iot_message_values->getUnifiedQuery($this->value_types)
-            ->join('iot_messages', 'id', '=', 'iot_message_id')
-            // ->whereIn('iot_message_id', [1])
-            ->orderBy('iot_message_id')
-            ->get();
+        $query = $this->baseQuery();
 
-        foreach ($messages as $i => $message) {
+        $query = $this->filter($query);
+
+        $query = $this->orderBy($query, 'iot_message_id');
+
+        $messages = $query->get();
+
+        foreach ($messages as $message) {
             unset($message->iot_message_id);
 
             $message->value = $this->caster->toType($message->value, $message->type);
@@ -36,5 +38,31 @@ class IotMessageValuesFetcher
         }
 
         return $messages;
+    }
+
+    protected function baseQuery(): Builder
+    {
+        return $this->union_query_iot_message_values->getUnifiedQuery($this->value_types)
+            ->join('iot_messages', 'id', '=', 'iot_message_id');
+    }
+
+    protected function filter(Builder $query, array $filters = []): Builder
+    {
+        if (empty($filters)) {
+            return $query;
+        }
+
+        return $query
+            // ->whereIn('iot_message_id', [1])
+;
+    }
+
+    protected function orderBy(Builder $query, ?string $column = null): Builder
+    {
+        if (is_null($column)) {
+            return $query;
+        }
+
+        return $query->orderBy($column);
     }
 }
