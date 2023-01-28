@@ -30,14 +30,18 @@ class IotMessageValuesFetcher
             ['subject' => $this->baseQuery()]
         );
 
-        $query->allowedFilters([
-            'canonical_topic',
-            'topic_client_id',
-            'topic_user_id',
-            AllowedFilter::exact('iot_message_values.value'),
-            'created_at',
-        ]);
-        // TODO: handle InvalidFilterQuery exception
+        $query
+            ->allowedFilters([
+                AllowedFilter::beginsWithStrict('canonical_topic'), // ! % in [%u,%d] isn't escaped
+                'topic_client_id',
+                'topic_user_id',
+                AllowedFilter::exact('value', 'iot_message_values.value', false),
+                'created_at',
+                // TODO: add scopes
+            ])
+            ->defaultSort('id')
+            ->allowedSorts('id');
+        // TODO: handle InvalidFilterQuery+InvalidSortQuery exception
 
         $messages = $query->get();
 
