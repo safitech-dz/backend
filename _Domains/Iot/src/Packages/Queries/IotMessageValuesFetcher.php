@@ -5,12 +5,12 @@ namespace Safitech\Iot\Packages\Queries;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Facades\DB;
 use Safitech\Iot\Models\IotMessage;
 use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
 use Safitech\Iot\Packages\IotData\Values\IotMessageValueCaster;
+use Safitech\Iot\Packages\Queries\Builders\UnionQueryIotMessageValues;
 
-class UnionIotMessageValuesQuery
+class IotMessageValuesFetcher
 {
     protected array $messages_ids;
 
@@ -20,7 +20,8 @@ class UnionIotMessageValuesQuery
 
     public function __construct(
         protected DataEntityMapper $data_entity_mapper,
-        protected IotMessageValueCaster $caster
+        protected IotMessageValueCaster $caster,
+        protected UnionQueryIotMessageValues $union_query_iot_message_values
     ) {
         $this->value_types = $data_entity_mapper->value_types;
 
@@ -37,7 +38,15 @@ class UnionIotMessageValuesQuery
     {
         $this->setMessagesIds();
 
-        $results = $this->fetchIotMessageValues($this->value_types);
+        $results =
+            $this->union_query_iot_message_values->getUnifiedQuery(
+                $this->value_types,
+                function (Builder $q) {
+                    $q->whereIn('iot_message_id', $this->messages_ids)
+                        ->orderBy('iot_message_id');
+                }
+            )
+            ->get();
 
         foreach ($results as $result) {
             $model = $this->data_entity_mapper->getModelInstance($result->type)
@@ -53,40 +62,15 @@ class UnionIotMessageValuesQuery
         return $this->collection->load('iotMessage');
     }
 
-    protected function setMessagesIds()
-    {
-        $this->messages_ids = $this->filterMessages(IotMessage::query())->pluck('id')->toArray();
-    }
-
-    protected function fetchIotMessageValues(array $values, Builder $parent_query = null)
-    {
-        $value_type = array_pop($values);
-
-        $table_name = $this->data_entity_mapper->getTableName($value_type);
-
-        $query = DB::table($table_name)
-            ->select(["$table_name.*"])
-            ->addSelect(DB::raw("'$value_type' as type"))
-            ->whereIn('iot_message_id', $this->messages_ids);
-
-        if (! is_null($parent_query)) {
-            $query->union($parent_query);
-        }
-
-        if (! empty($values)) {
-            return $this->fetchIotMessageValues($values, $query);
-        }
-
-        return $this->filterValues($query)->get();
-    }
-
     protected function filterMessages(EloquentBuilder $query): EloquentBuilder
     {
         return $query;
     }
 
-    protected function filterValues(Builder $query): Builder
+    protected function setMessagesIds(): void
     {
-        return $query->orderBy('iot_message_id');
+        $this->messages_ids = $this->filterMessages(
+            IotMessage::query()
+        )->pluck('id')->toArray();
     }
 }
