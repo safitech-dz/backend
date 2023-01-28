@@ -17,8 +17,8 @@ return new class extends Migration
     protected function create(string $table_name, callable $value_column_callback)
     {
         Schema::create($table_name, function (Blueprint $table) use ($value_column_callback) {
-            $table->id();
             $table->foreignId('iot_message_id')->constrained()->cascadeOnDelete();
+
             call_user_func_array($value_column_callback, [$table]);
         });
     }
@@ -27,6 +27,7 @@ return new class extends Migration
     {
         Schema::create('iot_messages', function (Blueprint $table) {
             $table->id();
+            // TODO: remove updated_at?
             $table->timestamps();
 
             $table->string('canonical_topic');
@@ -34,8 +35,8 @@ return new class extends Migration
             $table->string('topic_client_id');
 
             // ? refernce id (canonical_topic is simpler for querying)
-            // TODO: cascade?
-            $table->foreign('canonical_topic')->references('canonical_topic')->on('topics');
+            // TODO: cascade delete?
+            $table->foreign('canonical_topic')->references('canonical_topic')->on('topics')->cascadeOnUpdate();
         });
 
         $this->create($this->data_entity_mapper->getTableName('boolean'), function (Blueprint $table) {

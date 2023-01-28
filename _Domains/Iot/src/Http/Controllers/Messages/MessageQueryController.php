@@ -20,7 +20,6 @@ class MessageQueryController
      * @response status=200 scenario=success
      * [
      *     {
-     *         "id": 1,
      *         "iot_message_id": 1,
      *         "value": "Research Divide",
      *         "iot_message": {
@@ -33,7 +32,6 @@ class MessageQueryController
      *         }
      *     },
      *     {
-     *         "id": 1,
      *         "iot_message_id": 2,
      *         "value": {
      *             "humidity": 55,

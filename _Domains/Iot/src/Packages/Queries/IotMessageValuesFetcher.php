@@ -50,8 +50,7 @@ class IotMessageValuesFetcher
 
         foreach ($results as $result) {
             $model = $this->data_entity_mapper->getModelInstance($result->type)
-                ->forceFill([
-                    'id' => $result->id,
+                ->fill([
                     'iot_message_id' => $result->iot_message_id,
                     'value' => $this->caster->toType($result->value, $result->type),
                 ]);
