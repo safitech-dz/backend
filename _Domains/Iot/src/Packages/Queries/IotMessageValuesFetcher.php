@@ -24,13 +24,7 @@ class IotMessageValuesFetcher
 
     public function get()
     {
-        /** @var SpatieQueryBuilder */
-        $query = app()->make(
-            SpatieQueryBuilder::class,
-            ['subject' => $this->baseQuery()]
-        );
-
-        $query
+        $query = $this->spatieQueryBuilder()
             ->allowedFilters([
                 AllowedFilter::beginsWithStrict('canonical_topic'), // ! % in [%u,%d] isn't escaped
                 'topic_client_id',
@@ -61,5 +55,13 @@ class IotMessageValuesFetcher
         return IotMessage::query()
             ->fromSub($this->union_query_iot_message_values->getUnifiedQuery($this->value_types), 'iot_message_values')
             ->join('iot_messages', 'iot_messages.id', '=', 'iot_message_values.iot_message_id');
+    }
+
+    protected function spatieQueryBuilder(): SpatieQueryBuilder
+    {
+        return app()->make(
+            SpatieQueryBuilder::class,
+            ['subject' => $this->baseQuery()]
+        );
     }
 }
