@@ -10,10 +10,10 @@ Route::middleware('auth:sanctum')
     ->group(function () {
         Route::apiResource('topics', TopicController::class);
 
-        Route::apiResource('messages', MessageController::class)->only('store');
+        Route::prefix('messages')
+            ->group(function () {
+                Route::apiResource('', MessageController::class)->only('store');
 
-        Route::controller(MessageQueryController::class)->group(function () {
-            Route::get('iot-data/{topic}', 'query');
-            Route::get('iot-data', 'all');
-        });
+                Route::get('query', MessageQueryController::class);
+            });
     });
