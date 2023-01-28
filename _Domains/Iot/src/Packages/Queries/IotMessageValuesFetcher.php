@@ -3,20 +3,16 @@
 namespace Safitech\Iot\Packages\Queries;
 
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-use Illuminate\Database\Query\Builder;
 use Safitech\Iot\Models\IotMessage;
 use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
 use Safitech\Iot\Packages\IotData\Values\IotMessageValueCaster;
 use Safitech\Iot\Packages\Queries\Builders\UnionQueryIotMessageValues;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder as SpatieQueryBuilder;
 
 class IotMessageValuesFetcher
 {
-    protected array $messages_ids;
-
     protected array $value_types;
-
-    protected EloquentCollection $collection;
 
     public function __construct(
         protected DataEntityMapper $data_entity_mapper,
@@ -24,52 +20,48 @@ class IotMessageValuesFetcher
         protected UnionQueryIotMessageValues $union_query_iot_message_values
     ) {
         $this->value_types = $data_entity_mapper->value_types;
-
-        $this->collection = new EloquentCollection([]);
     }
 
-    /**
-     * 3 queries
-     * - pluck messages IDs
-     * - get unified values
-     * - load messages for values
-     */
-    public function all()
+    public function get()
     {
-        $this->setMessagesIds();
+        $query = $this->spatieQueryBuilder()
+            ->allowedFilters([
+                AllowedFilter::beginsWithStrict('canonical_topic'), // ! % in [%u,%d] isn't escaped
+                'topic_client_id',
+                'topic_user_id',
+                AllowedFilter::exact('value', 'iot_message_values.value', false),
+                'created_at',
+                // TODO: add scopes
+            ])
+            ->defaultSort('id')
+            ->allowedSorts('id');
+        // TODO: handle InvalidFilterQuery+InvalidSortQuery exception
 
-        $results =
-            $this->union_query_iot_message_values->getUnifiedQuery(
-                $this->value_types,
-                function (Builder $q) {
-                    $q->whereIn('iot_message_id', $this->messages_ids)
-                        ->orderBy('iot_message_id');
-                }
-            )
-            ->get();
+        $messages = $query->get();
 
-        foreach ($results as $result) {
-            $model = $this->data_entity_mapper->getModelInstance($result->type)
-                ->fill([
-                    'iot_message_id' => $result->iot_message_id,
-                    'value' => $this->caster->toType($result->value, $result->type),
-                ]);
+        foreach ($messages as $message) {
+            unset($message->iot_message_id);
 
-            $this->collection->push($model);
+            $message->value = $this->caster->toType($message->value, $message->type);
+
+            unset($message->type);
         }
 
-        return $this->collection->load('iotMessage');
+        return $messages;
     }
 
-    protected function filterMessages(EloquentBuilder $query): EloquentBuilder
+    protected function baseQuery(): EloquentBuilder
     {
-        return $query;
+        return IotMessage::query()
+            ->fromSub($this->union_query_iot_message_values->getUnifiedQuery($this->value_types), 'iot_message_values')
+            ->join('iot_messages', 'iot_messages.id', '=', 'iot_message_values.iot_message_id');
     }
 
-    protected function setMessagesIds(): void
+    protected function spatieQueryBuilder(): SpatieQueryBuilder
     {
-        $this->messages_ids = $this->filterMessages(
-            IotMessage::query()
-        )->pluck('id')->toArray();
+        return app()->make(
+            SpatieQueryBuilder::class,
+            ['subject' => $this->baseQuery()]
+        );
     }
 }
