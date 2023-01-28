@@ -8,6 +8,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Safitech\Iot\Models\IotMessage;
 use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
+use Safitech\Iot\Packages\IotData\Values\IotMessageValueCaster;
 
 class UnionIotMessageValuesQuery
 {
@@ -18,7 +19,8 @@ class UnionIotMessageValuesQuery
     protected EloquentCollection $collection;
 
     public function __construct(
-        protected DataEntityMapper $data_entity_mapper
+        protected DataEntityMapper $data_entity_mapper,
+        protected IotMessageValueCaster $caster
     ) {
         $this->value_types = $data_entity_mapper->value_types;
 
@@ -42,7 +44,7 @@ class UnionIotMessageValuesQuery
                 ->forceFill([
                     'id' => $result->id,
                     'iot_message_id' => $result->iot_message_id,
-                    'value' => $this->castValue($result->value, $result->type),
+                    'value' => $this->caster->toType($result->value, $result->type),
                 ]);
 
             $this->collection->push($model);
@@ -86,17 +88,5 @@ class UnionIotMessageValuesQuery
     protected function filterValues(Builder $query): Builder
     {
         return $query->orderBy('iot_message_id');
-    }
-
-    // TODO: extract
-    protected function castValue(mixed $value, string $type): mixed
-    {
-        return match ($type) {
-            'json' => json_decode($value),
-            'integer' => (int) $value,
-            'boolean' => (bool) $value,
-            'float' => (float) $value,
-            default => $value,
-        };
     }
 }
