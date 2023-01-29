@@ -1,6 +1,6 @@
 <?php
 
-namespace Safitech\Iot\Packages\IotData\Values;
+namespace Safitech\Iot\Packages\IotMessages;
 
 use Illuminate\Support\Collection;
 
@@ -10,8 +10,19 @@ class IotValueTypes
 
     public function __construct()
     {
-        $this->value_types = collect(['boolean', 'date', 'float', 'integer', 'json', 'string', 'text', 'time']);
+        $this->value_types = collect([
+            'boolean',
+            'date',
+            'float',
+            'integer',
+            'json',
+            'string',
+            'text',
+            'time'
+        ]);
     }
+
+    // * add collection method when needed
 
     public function all(): array
     {

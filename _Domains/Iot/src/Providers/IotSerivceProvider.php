@@ -5,7 +5,7 @@ namespace Safitech\Iot\Providers;
 use Illuminate\Support\ServiceProvider;
 use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
 use Safitech\Iot\Packages\IotData\Values\IotMessageValueCaster;
-use Safitech\Iot\Packages\IotData\Values\IotValueTypes;
+use Safitech\Iot\Packages\IotMessages\IotValueTypes;
 
 class IotSerivceProvider extends ServiceProvider
 {
