@@ -4,8 +4,10 @@
 
 - PHP 8.1
 - MySQL database server
+- Composer
 
-[XAMPP for windows](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.1.12/)
+[Donwload XAMPP for windows](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.1.12/)
+[Download Composer](https://getcomposer.org/download/)
 
 
 ## Deployment steps
