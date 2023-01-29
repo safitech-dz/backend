@@ -4,8 +4,8 @@ namespace Safitech\Iot\Packages\Queries;
 
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Safitech\Iot\Models\IotMessage;
-use Safitech\Iot\Packages\IotData\Values\IotMessageValueCaster;
 use Safitech\Iot\Packages\Queries\Builders\UnionQueryIotMessageValues;
+use Safitech\Iot\Support\Facades\IotMessageValueCaster;
 use Safitech\Iot\Support\Facades\IotValueTypes;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder as SpatieQueryBuilder;
@@ -13,7 +13,6 @@ use Spatie\QueryBuilder\QueryBuilder as SpatieQueryBuilder;
 class IotMessageValuesFetcher
 {
     public function __construct(
-        protected IotMessageValueCaster $caster,
         protected UnionQueryIotMessageValues $union_query_iot_message_values
     ) {
     }
@@ -38,7 +37,7 @@ class IotMessageValuesFetcher
         foreach ($messages as $message) {
             unset($message->iot_message_id);
 
-            $message->value = $this->caster->toType($message->value, $message->type);
+            $message->value = IotMessageValueCaster::toType($message->value, $message->type);
 
             unset($message->type);
         }
