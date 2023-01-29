@@ -5,12 +5,13 @@ namespace Safitech\Iot\Packages\Queries\Builders;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Safitech\Iot\Support\Facades\IotMessageValueDbMapper;
+use Safitech\Iot\Support\Facades\IotMessageValueTypes;
 
 class UnionQueryIotMessageValues
 {
-    public function getUnifiedQuery(array $values): Builder
+    public function getUnifiedQuery(?array $values = null): Builder
     {
-        // TODO: empty values -> all
+        $values ??= IotMessageValueTypes::all();
 
         return Db::query()->from(
             $this->unifyQueries($values)
