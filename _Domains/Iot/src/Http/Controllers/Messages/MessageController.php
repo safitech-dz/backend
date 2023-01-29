@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Safitech\Iot\Models\IotMessage;
 use Safitech\Iot\Models\Topic;
-use Safitech\Iot\Packages\IotData\Topics\ParsedTopic;
+use Safitech\Iot\Packages\Topics\ParsedTopic;
 use Safitech\Iot\Support\Facades\IotMessageValueDbMapper;
 
 /**
