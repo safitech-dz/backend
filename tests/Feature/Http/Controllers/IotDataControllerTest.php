@@ -38,7 +38,7 @@ class IotDataControllerTest extends TestCase
         return [
             '%u/%d/sensor/OWM/actualWeather' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/sensor/OWM/actualWeather',
-                'message' => [
+                'iot_message_value' => [
                     'humidity' => $faker->numberBetween(0, 100),
                     'rainfall' => $faker->numberBetween(0, 1000),
                     'pressure' => $faker->numberBetween(800, 1200),
@@ -48,7 +48,7 @@ class IotDataControllerTest extends TestCase
             ]],
             '%u/%d/sensor/OWM/dailyWeather' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/sensor/OWM/dailyWeather',
-                'message' => [
+                'iot_message_value' => [
                     'humidity' => $faker->numberBetween(0, 100),
                     'rainfall' => $faker->numberBetween(0, 1000),
                     'pressure' => $faker->numberBetween(800, 1200),
@@ -60,27 +60,27 @@ class IotDataControllerTest extends TestCase
             ]],
             '%u/%d/actuator/irrignnov_V1/state' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/actuator/irrignnov_V1/state',
-                'message' => $faker->boolean(),
+                'iot_message_value' => $faker->boolean(),
             ]],
             '%u/%d/actuator/irrignnov_V1/last_irrigation_begin' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/actuator/irrignnov_V1/last_irrigation_begin',
-                'message' => $faker->numberBetween(1668372661695),
+                'iot_message_value' => $faker->numberBetween(1668372661695),
             ]],
             '%u/%d/actuator/irrignnov_V1/last_irrigation_end' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/actuator/irrignnov_V1/last_irrigation_end',
-                'message' => $faker->numberBetween(1668372661695),
+                'iot_message_value' => $faker->numberBetween(1668372661695),
             ]],
             '%u/%d/actuator/irrignnov_V1/method' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/actuator/irrignnov_V1/method',
-                'message' => $faker->randomElement([0, 1, 2]),
+                'iot_message_value' => $faker->randomElement([0, 1, 2]),
             ]],
             '%u/%d/actuator/irrignnov_V1/kc' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/actuator/irrignnov_V1/kc',
-                'message' => $faker->randomFloat(2, 0, 2),
+                'iot_message_value' => $faker->randomFloat(2, 0, 2),
             ]],
             '%u/%d/actuator/irrignnov_V1/drip' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/actuator/irrignnov_V1/drip',
-                'message' => [
+                'iot_message_value' => [
                     $faker->numberBetween(0, 100),
                     $faker->numberBetween(0, 1000),
                     $faker->numberBetween(0, 1000),
@@ -88,7 +88,7 @@ class IotDataControllerTest extends TestCase
             ]],
             '%u/%d/actuator/irrignnov_V1/sprinkler' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/actuator/irrignnov_V1/sprinkler',
-                'message' => [
+                'iot_message_value' => [
                     $faker->randomFloat(2, 0, 100),
                     $faker->numberBetween(0, 10000),
                     $faker->numberBetween(0, 10000),
@@ -97,35 +97,35 @@ class IotDataControllerTest extends TestCase
             ]],
             '%u/%d/actuator/irrignnov_V1/time' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/actuator/irrignnov_V1/time',
-                'message' => $faker->time('H:i'),
+                'iot_message_value' => $faker->time('H:i'),
             ]],
             '%u/%d/actuator/irrignnov_V1/frequence' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/actuator/irrignnov_V1/frequence',
-                'message' => $faker->numberBetween(0, 99),
+                'iot_message_value' => $faker->numberBetween(0, 99),
             ]],
             '%u/%d/global/crop' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/global/crop',
-                'message' => $faker->word(),
+                'iot_message_value' => $faker->word(),
             ]],
             '%u/%d/global/position' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/global/position',
-                'message' => [
+                'iot_message_value' => [
                     $faker->randomFloat(),
                     $faker->randomFloat(),
                 ],
             ]],
             '%u/%d/global/area' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/global/area',
-                'message' => $faker->randomFloat(2, 0, 1000000),
+                'iot_message_value' => $faker->randomFloat(2, 0, 1000000),
             ]],
             '%u/%d/sensor/irrignnov_V1/etm' => [fn (Generator $faker): array => [
                 'real_topic' => 'x/x/sensor/irrignnov_V1/etm',
-                'message' => $faker->randomFloat(2, -1000, 1000),
+                'iot_message_value' => $faker->randomFloat(2, -1000, 1000),
             ]],
             '%u/%d/sensor/irrignnov_V1/prediction' => [
                 fn (Generator $faker): array => [
                     'real_topic' => 'x/x/sensor/irrignnov_V1/prediction',
-                    'message' => [
+                    'iot_message_value' => [
                         'ET0' => [
                             $faker->randomFloat(2, -1000, 1000),
                         ],

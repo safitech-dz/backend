@@ -19,8 +19,8 @@ class MessageController
     /**
      * Store IOT message
      *
-     * @bodyParam topic  string required  Example: simulator/simulator/sensor/OWM/actualWeather
-     * @bodyParam message object required  Example: {"humidity":55,"rainfall":200,"pressure":900,"temperature":24,"wind_speed":60}
+     * @bodyParam real_topic  string required  Example: simulator/simulator/sensor/OWM/actualWeather
+     * @bodyParam iot_message_value object required  Example: {"humidity":55,"rainfall":200,"pressure":900,"temperature":24,"wind_speed":60}
      *
      * @response status=201 scenario=success
      * {
@@ -45,29 +45,29 @@ class MessageController
      */
     public function store(Request $request)
     {
-        $request->validate(['real_topic' => ['required'], 'message' => ['required']]);
+        $request->validate(['real_topic' => ['required'], 'iot_message_value' => ['required']]);
 
         $parsed_topic = app(ParsedTopic::class, ['real' => $request->real_topic]);
 
         $topic = Topic::where('canonical_topic', $parsed_topic->getCanonical())->firstOrFail();
 
-        $data = Validator::make(
-            $request->only('message'),
+        $value = Validator::make(
+            $request->only('iot_message_value'),
             $topic->rules
         )->validate();
 
         $iot_message = IotMessage::create($parsed_topic->toArray());
 
-        $iot_value = IotMessageValueDbMapper::getModelInstance($topic->type);
+        $iot_message_value = IotMessageValueDbMapper::getModelInstance($topic->type);
 
-        $iot_value->fill([
-            'value' => $data['message'],
+        $iot_message_value->fill([
+            'value' => $value['iot_message_value'],
             'iot_message_id' => $iot_message->id,
         ])->save();
 
-        $iot_value->setRelation('iot_message', $iot_message);
+        $iot_message_value->setRelation('iot_message', $iot_message);
 
         // ? reshape
-        return $iot_value;
+        return $iot_message_value;
     }
 }

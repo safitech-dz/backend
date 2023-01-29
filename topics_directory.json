@@ -7,12 +7,12 @@
         "description": "Fichier JSON sur les données météorologique actuel",
         "type": "json",
         "rules": {
-            "message": ["required", "array"],
-            "message.humidity": ["required", "numeric", "min:0", "max:100"],
-            "message.rainfall": ["required", "numeric", "min:0", "max:1000"],
-            "message.pressure": ["required", "numeric", "min:800", "max:1200"],
-            "message.temperature": ["required", "numeric", "min:-100", "max:100"],
-            "message.wind_speed": ["required", "numeric", "min:0", "max:1000"]
+            "iot_message_value": ["required", "array"],
+            "iot_message_value.humidity": ["required", "numeric", "min:0", "max:100"],
+            "iot_message_value.rainfall": ["required", "numeric", "min:0", "max:1000"],
+            "iot_message_value.pressure": ["required", "numeric", "min:800", "max:1200"],
+            "iot_message_value.temperature": ["required", "numeric", "min:-100", "max:100"],
+            "iot_message_value.wind_speed": ["required", "numeric", "min:0", "max:1000"]
         }
     },
     {
@@ -23,14 +23,14 @@
         "description": "Fichier JSON sur les données météorologique du jour",
         "type": "json",
         "rules": {
-            "message": ["required", "array"],
-            "message.humidity": ["required", "numeric", "min:0", "max:100"],
-            "message.rainfall": ["required", "numeric", "min:0", "max:1000"],
-            "message.pressure": ["required", "numeric", "min:800", "max:1200"],
-            "message.temperature": ["required", "numeric", "min:-100", "max:100"],
-            "message.temperature_max": ["required", "numeric", "min:-100", "max:100"],
-            "message.temperature_min": ["required", "numeric", "min:-100", "max:100"],
-            "message.wind_speed": ["required", "numeric", "min:0", "max:100"]
+            "iot_message_value": ["required", "array"],
+            "iot_message_value.humidity": ["required", "numeric", "min:0", "max:100"],
+            "iot_message_value.rainfall": ["required", "numeric", "min:0", "max:1000"],
+            "iot_message_value.pressure": ["required", "numeric", "min:800", "max:1200"],
+            "iot_message_value.temperature": ["required", "numeric", "min:-100", "max:100"],
+            "iot_message_value.temperature_max": ["required", "numeric", "min:-100", "max:100"],
+            "iot_message_value.temperature_min": ["required", "numeric", "min:-100", "max:100"],
+            "iot_message_value.wind_speed": ["required", "numeric", "min:0", "max:100"]
         }
     },
     {
@@ -41,7 +41,7 @@
         "description": "Etat de l'irrigation",
         "type": "boolean",
         "rules": {
-            "message": ["required", "boolean"]
+            "iot_message_value": ["required", "boolean"]
         }
     },
     {
@@ -52,7 +52,7 @@
         "description": "Heure du début de la dernière irrigation",
         "type": "integer",
         "rules": {
-            "message": ["required", "integer", "min:1"]
+            "iot_message_value": ["required", "integer", "min:1"]
         }
     },
     {
@@ -63,7 +63,7 @@
         "description": "Heure de la fin de la dernière irrigation",
         "type": "integer",
         "rules": {
-            "message": ["required", "integer", "min:1"]
+            "iot_message_value": ["required", "integer", "min:1"]
         }
     },
     {
@@ -74,7 +74,7 @@
         "description": "Sélection de la méthode d'irrigation (2 : goutte à goutte, 1: asperseur, 0 : désactivé l'irrigation)",
         "type": "integer",
         "rules": {
-            "message": ["required", "integer", "in:0,1,2"]
+            "iot_message_value": ["required", "integer", "in:0,1,2"]
         }
     },
     {
@@ -85,7 +85,7 @@
         "description": "Valeur du coefficient cultural",
         "type": "float",
         "rules": {
-            "message": ["required", "numeric", "min:0", "max:2"]
+            "iot_message_value": ["required", "numeric", "min:0", "max:2"]
         }
     },
     {
@@ -96,10 +96,10 @@
         "description": "Vecteur de 3 valeurs pour le paramétrage goutte à goutte",
         "type": "json",
         "rules": {
-            "message": ["required", "array"],
-            "message.0": ["required", "numeric", "min:0", "max:100"],
-            "message.1": ["required", "integer", "min:0", "max:1000"],
-            "message.2": ["required", "integer", "min:0", "max:1000"]
+            "iot_message_value": ["required", "array"],
+            "iot_message_value.0": ["required", "numeric", "min:0", "max:100"],
+            "iot_message_value.1": ["required", "integer", "min:0", "max:1000"],
+            "iot_message_value.2": ["required", "integer", "min:0", "max:1000"]
         }
     },
     {
@@ -110,11 +110,11 @@
         "description": "Vecteur de 4 valeurs pour le paramétrage asperseur",
         "type": "json",
         "rules": {
-            "message": ["required", "array"],
-            "message.0": ["required", "numeric", "min:0", "max:100"],
-            "message.1": ["required", "integer", "min:0", "max:10000"],
-            "message.2": ["required", "integer", "min:0", "max:10000"],
-            "message.3": ["required", "numeric", "min:0", "max:20"]
+            "iot_message_value": ["required", "array"],
+            "iot_message_value.0": ["required", "numeric", "min:0", "max:100"],
+            "iot_message_value.1": ["required", "integer", "min:0", "max:10000"],
+            "iot_message_value.2": ["required", "integer", "min:0", "max:10000"],
+            "iot_message_value.3": ["required", "numeric", "min:0", "max:20"]
         }
     },
     {
@@ -125,7 +125,7 @@
         "description": "Heure d'irrigation",
         "type": "time",
         "rules": {
-            "message": ["required", "date_format:H:i"]
+            "iot_message_value": ["required", "date_format:H:i"]
         }
     },
     {
@@ -136,7 +136,7 @@
         "description": "Fréquence d'irrigation ( en jour(s) )",
         "type": "integer",
         "rules": {
-            "message": ["required", "integer"]
+            "iot_message_value": ["required", "integer"]
         }
     },
     {
@@ -147,7 +147,7 @@
         "description": "Nom de la culture actuel",
         "type": "string",
         "rules": {
-            "message": ["required", "string"]
+            "iot_message_value": ["required", "string"]
         }
     },
     {
@@ -158,9 +158,9 @@
         "description": "Position du champ Vecteur de 2 (Latitude et Longitude)",
         "type": "json",
         "rules": { 
-            "message": ["required", "array"],
-            "message.0": ["required", "numeric"],
-            "message.1": ["required", "numeric"]
+            "iot_message_value": ["required", "array"],
+            "iot_message_value.0": ["required", "numeric"],
+            "iot_message_value.1": ["required", "numeric"]
         }
     },
     {
@@ -171,7 +171,7 @@
         "description": "Surface de la parcelle en m²",
         "type": "float",
         "rules": {
-            "message": ["required", "numeric", "min:0", "max:1000000"]
+            "iot_message_value": ["required", "numeric", "min:0", "max:1000000"]
         }
     },
     {
@@ -182,7 +182,7 @@
         "description": "Valeur de l'évapotranspiration du jour",
         "type": "float",
         "rules": {
-            "message": ["required", "numeric", "min:-1000", "max:1000"]
+            "iot_message_value": ["required", "numeric", "min:-1000", "max:1000"]
         }
     },
     {
@@ -193,13 +193,13 @@
         "description": "Fichier JSON des prévisions d'irrigation de la semaines",
         "type": "json",
         "rules": {
-            "message": ["required", "array"],
-            "message.ET0": ["required", "array"],
-            "message.ET0.*": ["required", "numeric", "min:-1000", "max:1000"],
-            "message.ETM": ["required", "array"],
-            "message.ETM.*": ["required", "numeric", "min:-1000", "max:1000"],
-            "message.rain": ["required", "array"],
-            "message.rain.*": ["required", "numeric", "min:0", "max:1000"]
+            "iot_message_value": ["required", "array"],
+            "iot_message_value.ET0": ["required", "array"],
+            "iot_message_value.ET0.*": ["required", "numeric", "min:-1000", "max:1000"],
+            "iot_message_value.ETM": ["required", "array"],
+            "iot_message_value.ETM.*": ["required", "numeric", "min:-1000", "max:1000"],
+            "iot_message_value.rain": ["required", "array"],
+            "iot_message_value.rain.*": ["required", "numeric", "min:0", "max:1000"]
         }
     }
 ]
