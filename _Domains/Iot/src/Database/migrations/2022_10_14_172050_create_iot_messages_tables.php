@@ -3,15 +3,15 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
+use Safitech\Iot\Packages\IotMessages\IotMessageValueDbMapper;
 
 return new class extends Migration
 {
-    protected DataEntityMapper $data_entity_mapper;
+    protected IotMessageValueDbMapper $data_entity_mapper;
 
     public function __construct()
     {
-        $this->data_entity_mapper = app()->make(DataEntityMapper::class);
+        $this->data_entity_mapper = app()->make(IotMessageValueDbMapper::class);
     }
 
     protected function create(string $table_name, callable $value_column_callback)

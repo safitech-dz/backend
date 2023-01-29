@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Safitech\Iot\Models\IotMessage;
 use Safitech\Iot\Models\Topic;
-use Safitech\Iot\Packages\IotData\Topics\ParsedTopic;
-use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
+use Safitech\Iot\Packages\Topics\ParsedTopic;
+use Safitech\Iot\Support\Facades\IotMessageValueDbMapper;
 
 /**
  * @group Messages
@@ -43,7 +43,7 @@ class MessageController
      *     }
      * }
      */
-    public function store(Request $request, DataEntityMapper $data_entity_mapper)
+    public function store(Request $request)
     {
         $request->validate(['real_topic' => ['required'], 'message' => ['required']]);
 
@@ -58,7 +58,7 @@ class MessageController
 
         $iot_message = IotMessage::create($parsed_topic->toArray());
 
-        $iot_value = $data_entity_mapper->getModelInstance($topic->type);
+        $iot_value = IotMessageValueDbMapper::getModelInstance($topic->type);
 
         $iot_value->fill([
             'value' => $data['message'],
@@ -67,7 +67,7 @@ class MessageController
 
         $iot_value->setRelation('iot_message', $iot_message);
 
-        // TODO: reshape ?
+        // ? reshape
         return $iot_value;
     }
 }

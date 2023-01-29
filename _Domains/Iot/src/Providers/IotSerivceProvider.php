@@ -3,8 +3,9 @@
 namespace Safitech\Iot\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
-use Safitech\Iot\Packages\IotData\Values\IotMessageValueCaster;
+use Safitech\Iot\Packages\IotMessages\IotMessageValueDbMapper;
+use Safitech\Iot\Packages\IotMessages\IotMessageValueTypes;
+use Safitech\Iot\Support\Facades\IotMessageValueCaster;
 
 class IotSerivceProvider extends ServiceProvider
 {
@@ -14,7 +15,8 @@ class IotSerivceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(CommandServiceProvider::class);
 
-        $this->app->singleton(DataEntityMapper::class, fn () => new DataEntityMapper());
+        $this->app->singleton(IotMessageValueTypes::class, fn () => new IotMessageValueTypes());
+        $this->app->singleton(IotMessageValueDbMapper::class, fn () => new IotMessageValueDbMapper());
         $this->app->singleton(IotMessageValueCaster::class, fn () => new IotMessageValueCaster());
     }
 }

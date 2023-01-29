@@ -1,6 +1,6 @@
 <?php
 
-namespace Safitech\Iot\Packages\IotData\Values;
+namespace Safitech\Iot\Packages\IotMessages;
 
 class IotMessageValueCaster
 {

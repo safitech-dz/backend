@@ -2,7 +2,7 @@
 
 namespace Safitech\Iot\Database\Factories;
 
-use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
+use Safitech\Iot\Support\Facades\IotMessageValueTypes;
 
 class TopicFactory extends BaseIotFactory
 {
@@ -12,7 +12,7 @@ class TopicFactory extends BaseIotFactory
             'canonical_topic' => '%u/%d/'.$this->faker->word(),
             'qos' => random_int(0, 2),
             'retain' => $this->faker->boolean(),
-            'type' => $this->faker->randomElement(app()->make(DataEntityMapper::class)->value_types),
+            'type' => IotMessageValueTypes::random(),
             'rules' => [],
             'frequency_event' => null,
             'description' => $this->faker->paragraph(),

@@ -2,44 +2,26 @@
 
 namespace Safitech\Iot\Packages\Queries\Builders;
 
-use Exception;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
-use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
+use Safitech\Iot\Support\Facades\IotMessageValueDbMapper;
 
 class UnionQueryIotMessageValues
 {
-    // protected array $value_types;
-
-    public function __construct(
-        protected DataEntityMapper $data_entity_mapper,
-    ) {
-    }
-
-    public function getUnifiedQuery(array $values, ?callable $filter = null): Builder
+    public function getUnifiedQuery(array $values): Builder
     {
         // TODO: empty values -> all
 
-        $query = Db::query()->from(
+        return Db::query()->from(
             $this->unifyQueries($values)
         );
-
-        if ($filter) {
-            call_user_func($filter, $query);
-
-            if (! $query instanceof Builder) {
-                throw new Exception('Filter callback should not stop the query building (Example: end query with get)');
-            }
-        }
-
-        return $query;
     }
 
     protected function unifyQueries(array $values, Builder $parent_query = null): Builder
     {
         $value_type = array_pop($values);
 
-        $table_name = $this->data_entity_mapper->getTableName($value_type);
+        $table_name = IotMessageValueDbMapper::getTableName($value_type);
 
         $query = DB::table($table_name)
             ->select(["$table_name.*"])
