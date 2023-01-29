@@ -4,7 +4,7 @@ namespace Safitech\Iot\Packages\IotMessages;
 
 use Safitech\Iot\Models\BaseIotValueModel;
 
-class DataEntityMapper
+class IotMessageValueDbMapper
 {
     // public function getModelName(string $type): string
     // {

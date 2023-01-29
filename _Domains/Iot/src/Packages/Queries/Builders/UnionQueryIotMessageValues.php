@@ -5,7 +5,7 @@ namespace Safitech\Iot\Packages\Queries\Builders;
 use Exception;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
-use Safitech\Iot\Support\Facades\DataEntityMapper;
+use Safitech\Iot\Support\Facades\IotMessageValueDbMapper;
 
 class UnionQueryIotMessageValues
 {
@@ -32,7 +32,7 @@ class UnionQueryIotMessageValues
     {
         $value_type = array_pop($values);
 
-        $table_name = DataEntityMapper::getTableName($value_type);
+        $table_name = IotMessageValueDbMapper::getTableName($value_type);
 
         $query = DB::table($table_name)
             ->select(["$table_name.*"])

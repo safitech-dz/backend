@@ -4,7 +4,7 @@ namespace Safitech\Iot\Packages\IotMessages;
 
 use Illuminate\Support\Collection;
 
-class IotValueTypes
+class IotMessageValueTypes
 {
     public readonly Collection $value_types;
 
@@ -18,7 +18,7 @@ class IotValueTypes
             'json',
             'string',
             'text',
-            'time'
+            'time',
         ]);
     }
 

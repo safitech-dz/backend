@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Safitech\Iot\Models\IotMessage;
 use Safitech\Iot\Models\Topic;
 use Safitech\Iot\Packages\IotData\Topics\ParsedTopic;
-use Safitech\Iot\Support\Facades\DataEntityMapper;
+use Safitech\Iot\Support\Facades\IotMessageValueDbMapper;
 
 /**
  * @group Messages
@@ -58,7 +58,7 @@ class MessageController
 
         $iot_message = IotMessage::create($parsed_topic->toArray());
 
-        $iot_value = DataEntityMapper::getModelInstance($topic->type);
+        $iot_value = IotMessageValueDbMapper::getModelInstance($topic->type);
 
         $iot_value->fill([
             'value' => $data['message'],

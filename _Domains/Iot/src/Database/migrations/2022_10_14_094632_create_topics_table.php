@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Safitech\Iot\Support\Facades\IotValueTypes;
+use Safitech\Iot\Support\Facades\IotMessageValueTypes;
 
 return new class extends Migration
 {
@@ -23,7 +23,7 @@ return new class extends Migration
 
             $table->text('description')->nullable();
 
-            $table->enum('type', IotValueTypes::all());
+            $table->enum('type', IotMessageValueTypes::all());
 
             // ? use JSON column
             $table->text('rules');
