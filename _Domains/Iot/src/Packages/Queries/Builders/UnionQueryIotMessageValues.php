@@ -5,17 +5,10 @@ namespace Safitech\Iot\Packages\Queries\Builders;
 use Exception;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
-use Safitech\Iot\Packages\IotData\Values\DataEntityMapper;
+use Safitech\Iot\Support\Facades\DataEntityMapper;
 
 class UnionQueryIotMessageValues
 {
-    // protected array $value_types;
-
-    public function __construct(
-        protected DataEntityMapper $data_entity_mapper,
-    ) {
-    }
-
     public function getUnifiedQuery(array $values, ?callable $filter = null): Builder
     {
         // TODO: empty values -> all
@@ -39,7 +32,7 @@ class UnionQueryIotMessageValues
     {
         $value_type = array_pop($values);
 
-        $table_name = $this->data_entity_mapper->getTableName($value_type);
+        $table_name = DataEntityMapper::getTableName($value_type);
 
         $query = DB::table($table_name)
             ->select(["$table_name.*"])

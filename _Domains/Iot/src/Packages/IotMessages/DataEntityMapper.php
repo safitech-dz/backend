@@ -1,6 +1,6 @@
 <?php
 
-namespace Safitech\Iot\Packages\IotData\Values;
+namespace Safitech\Iot\Packages\IotMessages;
 
 use Safitech\Iot\Models\BaseIotValueModel;
 
