@@ -13,9 +13,9 @@ class IotValueTypes
         $this->value_types = collect(['boolean', 'date', 'float', 'integer', 'json', 'string', 'text', 'time']);
     }
 
-    public function toArray(): array
+    public function all(): array
     {
-        return $this->value_types->toArray();
+        return $this->value_types->all();
     }
 
     public function random(): string

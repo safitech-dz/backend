@@ -9,10 +9,10 @@ class TopicFactory extends BaseIotFactory
     public function definition()
     {
         return [
-            'canonical_topic' => '%u/%d/' . $this->faker->word(),
+            'canonical_topic' => '%u/%d/'.$this->faker->word(),
             'qos' => random_int(0, 2),
             'retain' => $this->faker->boolean(),
-            'type' => IotValueTypesFacade::random(),
+            'type' => IotValueTypesFacade::all(),
             'rules' => [],
             'frequency_event' => null,
             'description' => $this->faker->paragraph(),

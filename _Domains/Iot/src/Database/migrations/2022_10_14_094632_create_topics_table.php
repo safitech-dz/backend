@@ -23,7 +23,7 @@ return new class extends Migration
 
             $table->text('description')->nullable();
 
-            $table->enum('type', IotValueTypesFacade::toArray());
+            $table->enum('type', IotValueTypesFacade::all());
 
             // ? use JSON column
             $table->text('rules');

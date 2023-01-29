@@ -49,7 +49,7 @@ class IotMessageValuesFetcher
     protected function baseQuery(): EloquentBuilder
     {
         return IotMessage::query()
-            ->fromSub($this->union_query_iot_message_values->getUnifiedQuery(IotValueTypesFacade::toArray()), 'iot_message_values')
+            ->fromSub($this->union_query_iot_message_values->getUnifiedQuery(IotValueTypesFacade::all()), 'iot_message_values')
             ->join('iot_messages', 'iot_messages.id', '=', 'iot_message_values.iot_message_id');
     }
 
