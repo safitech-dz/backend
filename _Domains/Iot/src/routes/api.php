@@ -12,7 +12,9 @@ Route::middleware('auth:sanctum')
 
         Route::prefix('messages')
             ->group(function () {
-                Route::apiResource('', MessageController::class)->only('store');
+                Route::post('', [MessageController::class, 'store'])
+                    // TODO: GUARD -> only aggregator
+                    ->withoutMiddleware("throttle:api");
 
                 Route::get('query', MessageQueryController::class);
             });
