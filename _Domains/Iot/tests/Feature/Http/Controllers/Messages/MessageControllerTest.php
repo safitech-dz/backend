@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers;
+namespace Safitech\Iot\Tests\Feature\Http\Controllers;
 
 use Closure;
 use Faker\Generator;
@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class IotDataControllerTest extends TestCase
+class MessageControllerTest extends TestCase
 {
     use WithFaker;
     use RefreshDatabase;

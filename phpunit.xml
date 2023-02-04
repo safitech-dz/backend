@@ -11,6 +11,12 @@
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
+        <testsuite name="UnitIot">
+            <directory suffix="Test.php">./_Domains/Iot/tests/Unit</directory>
+        </testsuite>
+        <testsuite name="FeatureIot">
+            <directory suffix="Test.php">./_Domains/Iot/tests/Feature</directory>
+        </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
         <include>
