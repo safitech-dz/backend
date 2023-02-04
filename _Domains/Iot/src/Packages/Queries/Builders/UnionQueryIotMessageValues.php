@@ -13,8 +13,14 @@ class UnionQueryIotMessageValues
     {
         $values ??= IotMessageValueTypes::all();
 
+        return $this->unifyQueries($values);
+    }
+
+    public function getUnifiedQueryAs(?array $values = null, ?string $as = null): Builder
+    {
         return Db::query()->from(
-            $this->unifyQueries($values)
+            $this->getUnifiedQuery($values),
+            $as
         );
     }
 
