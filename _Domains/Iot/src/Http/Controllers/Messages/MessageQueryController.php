@@ -2,7 +2,9 @@
 
 namespace Safitech\Iot\Http\Controllers\Messages;
 
-use Safitech\Iot\Packages\Queries\IotMessageValuesFetcher;
+use Safitech\Iot\Models\IotMessage;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder as SpatieQueryBuilder;
 
 /**
  * @group Messages
@@ -60,8 +62,21 @@ class MessageQueryController
      *     }
      * ]
      */
-    public function __invoke(IotMessageValuesFetcher $iot_message_values_fetcher)
+    public function __invoke()
     {
-        return $iot_message_values_fetcher->get();
+        return SpatieQueryBuilder::for(IotMessage::class)
+            ->with('IotMessageValue')
+            ->allowedFilters([
+                AllowedFilter::beginsWithStrict('canonical_topic'), // ! % in [%u,%d] isn't escaped
+                'topic_client_id',
+                'topic_user_id',
+                AllowedFilter::exact('value', 'iot_message_values.value', false),
+                'created_at',
+                // TODO: add scopes
+            ])
+            ->defaultSort('id')
+            ->allowedSorts('id')
+            // TODO: handle InvalidFilterQuery+InvalidSortQuery exception
+            ->get();
     }
 }

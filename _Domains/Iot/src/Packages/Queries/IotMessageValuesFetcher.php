@@ -9,7 +9,7 @@ use Safitech\Iot\Support\Facades\UnionQueryIotMessageValues;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder as SpatieQueryBuilder;
 
-class IotMessageValuesFetcher
+class IotMessageValuesFetcher // ! DUMPED for Iot Message-Value relation
 {
     public function get()
     {
