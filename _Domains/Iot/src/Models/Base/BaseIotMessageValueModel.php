@@ -1,6 +1,6 @@
 <?php
 
-namespace Safitech\Iot\Models;
+namespace Safitech\Iot\Models\Base;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

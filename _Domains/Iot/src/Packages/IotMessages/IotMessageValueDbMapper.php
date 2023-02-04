@@ -2,7 +2,7 @@
 
 namespace Safitech\Iot\Packages\IotMessages;
 
-use Safitech\Iot\Models\BaseIotMessageValueModel;
+use Safitech\Iot\Models\Base\BaseIotMessageValueModel;
 
 class IotMessageValueDbMapper
 {

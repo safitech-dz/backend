@@ -2,6 +2,8 @@
 
 namespace Safitech\Iot\Models;
 
+use Safitech\Iot\Models\Base\BaseIotModel;
+
 class IotMessage extends BaseIotModel
 {
     const CREATED_AT = 'created_at';

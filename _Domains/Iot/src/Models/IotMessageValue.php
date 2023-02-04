@@ -4,11 +4,12 @@ namespace Safitech\Iot\Models;
 
 use Exception;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Safitech\Iot\Models\Base\BaseIotMessageValueModel;
 use Safitech\Iot\Support\Facades\IotMessageValueCaster;
 
 class IotMessageValue extends BaseIotMessageValueModel
 {
-    // ! READ_ONLY: table is SQL view
+    // ! READ_ONLY: table is SQL view (see: https://github.com/michaelachrisco/ReadOnlyTraitLaravel)
 
     protected function value(): Attribute
     {
