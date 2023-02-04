@@ -79,7 +79,7 @@ return new class extends Migration
         // ===================================================
 
         // TODO: get iot_message_values from mapper
-        DB::statement('CREATE VIEW iot_message_values AS '.UnionQueryIotMessageValues::getUnifiedQuery()->toSql());
+        DB::statement('CREATE OR REPLACE VIEW iot_message_values AS '.UnionQueryIotMessageValues::getUnifiedQuery()->toSql());
     }
 
     public function down()
