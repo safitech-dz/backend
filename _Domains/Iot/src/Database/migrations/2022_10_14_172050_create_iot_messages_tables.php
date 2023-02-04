@@ -2,8 +2,10 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Safitech\Iot\Packages\IotMessages\IotMessageValueDbMapper;
+use Safitech\Iot\Support\Facades\UnionQueryIotMessageValues;
 
 return new class extends Migration
 {
@@ -40,6 +42,8 @@ return new class extends Migration
                 ->cascadeOnUpdate();
         });
 
+        // ===================================================
+
         $this->create($this->data_entity_mapper->getTableName('boolean'), function (Blueprint $table) {
             $table->boolean('value');
         });
@@ -71,6 +75,11 @@ return new class extends Migration
         $this->create($this->data_entity_mapper->getTableName('json'), function (Blueprint $table) {
             $table->longText('value');
         });
+
+        // ===================================================
+
+        // TODO: get iot_message_values from mapper
+        DB::statement('CREATE VIEW iot_message_values AS '.UnionQueryIotMessageValues::getUnifiedQuery()->toSql());
     }
 
     public function down()

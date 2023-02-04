@@ -1,10 +1,10 @@
 <?php
 
-namespace Safitech\Iot\Models;
+namespace Safitech\Iot\Models\Base;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-abstract class BaseIotValueModel extends BaseIotModel
+abstract class BaseIotMessageValueModel extends BaseIotModel
 {
     protected $primaryKey = 'iot_message_id';
 

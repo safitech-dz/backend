@@ -2,7 +2,7 @@
 
 namespace Safitech\Iot\Packages\IotMessages;
 
-use Safitech\Iot\Models\BaseIotValueModel;
+use Safitech\Iot\Models\Base\BaseIotMessageValueModel;
 
 class IotMessageValueDbMapper
 {
@@ -10,12 +10,12 @@ class IotMessageValueDbMapper
     // {
     // }
 
-    public function getModelInstance(string $type): BaseIotValueModel
+    public function getModelInstance(string $type): BaseIotMessageValueModel
     {
         // TODO: validate $type
         $type = ucfirst(strtolower($type));
 
-        return  app()->make("Safitech\\Iot\\Models\\IotMessage{$type}Value");
+        return  app()->make("Safitech\\Iot\\Models\\IotMessageValue{$type}");
     }
 
     public function getTableName(string $type): string
@@ -23,6 +23,6 @@ class IotMessageValueDbMapper
         // TODO: validate $type
         $type = strtolower($type);
 
-        return "iot_message_{$type}_values";
+        return "iot_message_value_{$type}s";
     }
 }
