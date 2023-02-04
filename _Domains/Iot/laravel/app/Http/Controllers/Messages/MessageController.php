@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Safitech\Iot\App\Models\IotMessage;
 use Safitech\Iot\App\Models\Topic;
-use Safitech\Iot\Domain\Support\Facades\IotMessageValueDbMapper;
+use Safitech\Iot\Domain\IotMessageValues\Facades\IotMessageValueDbMapper;
 use Safitech\Iot\Domain\Topics\Parser\ParsedTopic;
 
 /**

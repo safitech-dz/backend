@@ -1,6 +1,6 @@
 <?php
 
-namespace Safitech\Iot\Domain\Packages\IotMessages;
+namespace Safitech\Iot\Domain\IotMessageValues\ValueTypes;
 
 use Illuminate\Support\Collection;
 

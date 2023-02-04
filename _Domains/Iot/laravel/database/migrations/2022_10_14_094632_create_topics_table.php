@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Safitech\Iot\Domain\Support\Facades\IotMessageValueTypes;
+use Safitech\Iot\Domain\IotMessageValues\Facades\IotMessageValueTypes;
 
 return new class extends Migration
 {

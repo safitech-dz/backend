@@ -4,7 +4,7 @@ namespace Tests;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Safitech\Iot\Services\TopicsImportService;
+use Safitech\Iot\Domain\Topics\Services\TopicsImportService;
 
 abstract class TestCase extends BaseTestCase
 {

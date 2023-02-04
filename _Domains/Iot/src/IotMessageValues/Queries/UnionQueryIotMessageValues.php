@@ -1,11 +1,11 @@
 <?php
 
-namespace Safitech\Iot\Domain\Packages\Queries\Builders;
+namespace Safitech\Iot\Domain\IotMessageValues\Queries;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
-use Safitech\Iot\Domain\Support\Facades\IotMessageValueDbMapper;
-use Safitech\Iot\Domain\Support\Facades\IotMessageValueTypes;
+use Safitech\Iot\Domain\IotMessageValues\Facades\IotMessageValueDbMapper;
+use Safitech\Iot\Domain\IotMessageValues\Facades\IotMessageValueTypes;
 
 class UnionQueryIotMessageValues
 {

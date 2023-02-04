@@ -3,10 +3,10 @@
 namespace Safitech\Iot\App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Safitech\Iot\Domain\Packages\IotMessages\IotMessageValueCaster;
-use Safitech\Iot\Domain\Packages\IotMessages\IotMessageValueDbMapper;
-use Safitech\Iot\Domain\Packages\IotMessages\IotMessageValueTypes;
-use Safitech\Iot\Domain\Packages\Queries\Builders\UnionQueryIotMessageValues;
+use Safitech\Iot\Domain\IotMessageValues\Caster\IotMessageValueCaster;
+use Safitech\Iot\Domain\IotMessageValues\DbMapper\IotMessageValueDbMapper;
+use Safitech\Iot\Domain\IotMessageValues\Queries\UnionQueryIotMessageValues;
+use Safitech\Iot\Domain\IotMessageValues\ValueTypes\IotMessageValueTypes;
 
 class IotSerivceProvider extends ServiceProvider
 {

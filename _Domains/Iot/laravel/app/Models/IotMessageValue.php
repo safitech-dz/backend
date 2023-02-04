@@ -5,7 +5,7 @@ namespace Safitech\Iot\App\Models;
 use Exception;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Safitech\Iot\App\Models\Base\BaseIotMessageValueModel;
-use Safitech\Iot\Domain\Support\Facades\IotMessageValueCaster;
+use Safitech\Iot\Domain\IotMessageValues\Facades\IotMessageValueCaster;
 
 class IotMessageValue extends BaseIotMessageValueModel
 {
