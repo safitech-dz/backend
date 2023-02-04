@@ -1,6 +1,6 @@
 <?php
 
-namespace Safitech\Iot\Packages\Topics;
+namespace Safitech\Iot\Domain\Packages\Topics;
 
 use Exception;
 

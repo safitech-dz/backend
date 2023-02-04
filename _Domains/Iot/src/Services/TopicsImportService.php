@@ -1,11 +1,11 @@
 <?php
 
-namespace Safitech\Iot\Services;
+namespace Safitech\Iot\Domain\Services;
 
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Safitech\Iot\Models\Topic;
+use Safitech\Iot\App\Models\Topic;
 
 class TopicsImportService
 {
