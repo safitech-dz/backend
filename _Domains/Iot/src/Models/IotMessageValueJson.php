@@ -2,7 +2,7 @@
 
 namespace Safitech\Iot\Models;
 
-class IotMessageJsonValue extends BaseIotValueModel
+class IotMessageValueJson extends BaseIotMessageValueModel
 {
     protected $casts = [
         'value' => 'array',

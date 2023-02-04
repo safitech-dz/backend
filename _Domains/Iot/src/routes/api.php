@@ -14,7 +14,7 @@ Route::middleware('auth:sanctum')
             ->group(function () {
                 Route::post('', [MessageController::class, 'store'])
                     // TODO: GUARD -> only aggregator
-                    ->withoutMiddleware("throttle:api");
+                    ->withoutMiddleware('throttle:api');
 
                 Route::get('query', MessageQueryController::class);
             });

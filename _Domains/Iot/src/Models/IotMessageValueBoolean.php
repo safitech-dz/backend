@@ -2,7 +2,7 @@
 
 namespace Safitech\Iot\Models;
 
-class IotMessageBooleanValue extends BaseIotValueModel
+class IotMessageValueBoolean extends BaseIotMessageValueModel
 {
     protected $casts = [
         'value' => 'boolean',
