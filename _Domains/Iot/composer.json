@@ -2,7 +2,10 @@
     "name": "safitech/iot",
     "autoload": {
         "psr-4": {
-            "Safitech\\Iot\\": "src/"
+            "Safitech\\Iot\\Domain\\": "src/",
+            "Safitech\\Iot\\App\\": "laravel/app/",
+            "Safitech\\Iot\\Database\\Factories\\": "laravel/database/factories/",
+            "Safitech\\Iot\\Database\\Seeders\\": "laravel/database/seeders/"
         }
     },
     "authors": [
@@ -15,7 +18,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Safitech\\Iot\\Providers\\IotSerivceProvider"
+                "Safitech\\Iot\\App\\Providers\\IotSerivceProvider"
             ]
         }
     }
