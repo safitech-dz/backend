@@ -1,6 +1,6 @@
 <?php
 
-namespace Safitech\Iot\Domain\Packages\Topics;
+namespace Safitech\Iot\Domain\Topics\Parser;
 
 use Exception;
 

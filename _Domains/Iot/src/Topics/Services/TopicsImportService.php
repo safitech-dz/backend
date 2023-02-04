@@ -1,6 +1,6 @@
 <?php
 
-namespace Safitech\Iot\Domain\Services;
+namespace Safitech\Iot\Domain\Topics\Services;
 
 use Exception;
 use Illuminate\Console\Command;

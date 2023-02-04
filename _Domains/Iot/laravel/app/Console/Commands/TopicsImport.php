@@ -3,7 +3,7 @@
 namespace Safitech\Iot\App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Safitech\Iot\Domain\Services\TopicsImportService;
+use Safitech\Iot\Domain\Topics\Services\TopicsImportService;
 
 class TopicsImport extends Command
 {

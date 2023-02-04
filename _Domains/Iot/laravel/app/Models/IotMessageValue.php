@@ -9,6 +9,7 @@ use Safitech\Iot\Domain\Support\Facades\IotMessageValueCaster;
 
 class IotMessageValue extends BaseIotMessageValueModel
 {
+    // Inherit unused hasFactory trait
     // ! READ_ONLY: table is SQL view (see: https://github.com/michaelachrisco/ReadOnlyTraitLaravel)
 
     protected function value(): Attribute
