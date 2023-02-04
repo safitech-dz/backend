@@ -15,5 +15,8 @@ class IotMessage extends BaseIotModel
         return $this->belongsTo(Topic::class, 'canonical_topic', 'canonical_topic');
     }
 
-    //  TODO: hasMany values
+    public function IotMessageValue()
+    {
+        return $this->hasOne(IotMessageValue::class);
+    }
 }
